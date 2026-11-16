@@ -1,0 +1,88 @@
+.page { padding-inline: var(--page-gutter); }
+.main { padding-block: clamp(64px, 8vw, 136px) clamp(96px, 10vw, 170px); }
+.heading { display: flex; align-items: baseline; justify-content: space-between; gap: 24px; }
+.heading h1, .unavailable h1 { margin: 0; font-family: var(--font-marcellus), Georgia, serif; font-size: clamp(64px, 8.4vw, 144px); font-weight: 400; line-height: 1; letter-spacing: -.055em; }
+.heading sup { display: inline-block; margin-left: 18px; font-family: var(--font-open-sans), sans-serif; font-size: 16px; letter-spacing: 0; vertical-align: top; padding-top: 12px; font-variant-numeric: tabular-nums; }
+.textLink { display: inline-flex; min-height: 44px; align-items: center; gap: 24px; font-size: 14px; text-decoration: underline; text-underline-offset: 5px; }
+.textLink:hover { opacity: .65; }
+.feedback { margin: 0; color: inherit; font-size: 13px; line-height: 1.6; text-wrap: pretty; }
+.feedback:not(:empty) { margin-block: 16px; }
+.cartGrid { display: grid; grid-template-columns: minmax(0, 1.8fr) minmax(300px, 1fr); gap: clamp(32px, 7vw, 120px); margin-top: 64px; align-items: start; }
+.items { min-width: 0; margin: 0; padding: 0; border: 0; }
+.srOnly { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.tableHeading { display: flex; justify-content: space-between; padding-bottom: 18px; border-bottom: 1px solid rgb(255 255 255 / 20%); color: #c4c0ba; font-size: 13px; }
+.line { display: grid; grid-template-columns: 140px minmax(0, 1fr) auto; gap: 28px; padding-block: 28px; border-bottom: 1px solid rgb(255 255 255 / 20%); }
+.lineImage { position: relative; display: block; width: 100%; aspect-ratio: 3 / 4; background: #353431; outline: 1px solid rgb(255 255 255 / 10%); outline-offset: -1px; }
+.lineImage img { object-fit: cover; }
+.lineDetails { display: flex; min-width: 0; flex-direction: column; align-items: flex-start; }
+.productTitle { font-family: var(--font-marcellus), Georgia, serif; font-size: clamp(22px, 2vw, 32px); line-height: 1.15; text-wrap: pretty; }
+.variant, .unitPrice { margin: 8px 0 0; color: #c4c0ba; font-size: 13px; line-height: 1.6; }
+.lineControls { display: flex; align-items: center; flex-wrap: wrap; gap: 16px; margin-top: auto; padding-top: 20px; }
+.quantity { display: inline-flex; align-items: center; border: 1px solid rgb(255 255 255 / 25%); }
+.quantity button { width: 44px; height: 44px; border: 0; background: transparent; color: inherit; font-size: 20px; cursor: pointer; }
+.quantity output { min-width: 24px; text-align: center; font-size: 13px; font-variant-numeric: tabular-nums; }
+.uniqueNote { margin: 0; color: #c4c0ba; font-size: 12px; line-height: 1.6; }
+.remove { min-height: 44px; padding: 0; border: 0; background: transparent; color: #c4c0ba; text-decoration: underline; text-underline-offset: 4px; font-size: 12px; cursor: pointer; }
+.lineTotal { margin: 0; font-size: 16px; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.summary { padding: clamp(24px, 2.8vw, 48px); background: #e9e2d6; color: #2a2a2a; }
+.summary h2 { margin: 0 0 40px; font-family: var(--font-marcellus), Georgia, serif; font-size: clamp(28px, 2.7vw, 44px); font-weight: 400; line-height: 1.1; letter-spacing: -.035em; }
+.summaryRow, .estimatedTotal { display: flex; justify-content: space-between; gap: 16px; font-size: 14px; font-variant-numeric: tabular-nums; }
+.checkoutNote { margin: 16px 0 28px; max-width: 32ch; color: #514b45; font-size: 13px; line-height: 1.6; text-wrap: pretty; }
+.estimatedTotal { padding-top: 24px; border-top: 1px solid rgb(0 0 0 / 15%); font-size: 16px; }
+.checkoutButton, .emptyButton { display: flex; width: 100%; min-height: 56px; align-items: center; justify-content: space-between; gap: 24px; margin-top: 28px; padding: 16px 20px; border: 0; background: #2a2a2a; color: #e9e2d6; font-family: inherit; font-size: 14px; cursor: pointer; transition: background 180ms ease, transform 180ms ease; }
+.checkoutButton:hover { background: #45403b; }
+.checkoutButton:active, .emptyButton:active, .addButton:active { transform: scale(.96); }
+.secureNote { margin: 16px 0 0; color: #514b45; text-align: center; font-size: 12px; }
+.empty { display: flex; min-height: 430px; flex-direction: column; align-items: center; justify-content: center; margin-top: 40px; padding-block: 64px; border-block: 1px solid rgb(255 255 255 / 20%); text-align: center; }
+.eyebrow { margin: 0 0 24px; color: #c4c0ba; font-size: 12px; }
+.empty h2 { margin: 0; font-family: var(--font-marcellus), Georgia, serif; font-size: clamp(44px, 5vw, 76px); font-weight: 400; letter-spacing: -.045em; line-height: 1.05; }
+.empty > p:last-of-type { margin: 24px 0 0; color: #c4c0ba; font-size: 15px; line-height: 1.6; text-wrap: pretty; }
+.emptyButton { width: auto; background: #e9e2d6; color: #2a2a2a; }
+.emptyButton:hover { background: #fffaf0; }
+.recommendations { margin-top: clamp(80px, 9vw, 150px); }
+.discoverHeading { display: flex; align-items: baseline; justify-content: space-between; gap: 24px; margin-bottom: 32px; }
+.discoverHeading h2 { margin: 0; font-family: var(--font-marcellus), Georgia, serif; font-size: clamp(32px, 3.4vw, 52px); font-weight: 400; letter-spacing: -.04em; line-height: 1.1; text-wrap: balance; }
+.discoverHeading p { margin: 0; color: #c4c0ba; font-size: 14px; }
+.discoverGrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.discoverImage { position: relative; aspect-ratio: 4 / 5; outline: 1px solid rgb(255 255 255 / 10%); outline-offset: -1px; }
+.discoverImage img { object-fit: cover; }
+.discoverCaption { display: flex; justify-content: space-between; gap: 16px; margin-top: 18px; font-size: 15px; font-variant-numeric: tabular-nums; }
+.discoverCaption h3 { margin: 0; font-size: inherit; font-weight: 400; }
+.addForm { margin-top: 16px; }
+.quickAdd { margin-top: 12px; }
+.option label { display: block; margin-bottom: 8px; font-size: 12px; color: #c4c0ba; }
+.option select { width: 100%; min-height: 44px; padding: 10px; border: 1px solid rgb(255 255 255 / 30%); background: #2a2a2a; color: #f4f4f4; font: inherit; font-size: 13px; }
+.addButton { display: flex; width: 100%; min-height: 48px; justify-content: space-between; align-items: center; gap: 24px; padding: 10px 0; border: 0; border-bottom: 1px solid rgb(255 255 255 / 30%); background: transparent; color: #f4f4f4; text-align: left; font: inherit; font-size: 13px; cursor: pointer; transition: opacity 180ms ease, transform 180ms ease; }
+.addButton:hover, .remove:hover, .quantity button:hover { opacity: .65; }
+.soldOut { margin-top: 24px; font-size: 13px; color: #c4c0ba; }
+.page button:focus-visible, .page select:focus-visible, .addButton:focus-visible { outline: 1px solid currentColor; outline-offset: 4px; }
+.page button:disabled, .quickAdd button:disabled { opacity: .35; cursor: default; }
+.loading, .unavailable { min-height: 500px; padding-block: 48px; }
+.unavailable p { margin-top: 40px; }
+@media (max-width: 1000px) {
+  .cartGrid { gap: 32px; grid-template-columns: minmax(0, 1.4fr) minmax(280px, 1fr); }
+  .line { grid-template-columns: 96px minmax(0, 1fr) auto; gap: 16px; }
+  .lineControls { gap: 8px; }
+}
+@media (max-width: 700px) {
+  .main { padding-top: 64px; }
+  .heading { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .heading h1, .unavailable h1 { font-size: clamp(56px, 15vw, 88px); }
+  .heading sup { margin-left: 12px; font-size: 13px; padding-top: 4px; }
+  .cartGrid { grid-template-columns: minmax(0, 1fr); gap: 40px; margin-top: 32px; }
+  .line { grid-template-columns: 88px minmax(0, 1fr) auto; gap: 12px; padding-block: 24px; }
+  .lineImage { aspect-ratio: 3 / 4; }
+  .productTitle { font-size: 22px; }
+  .lineTotal { font-size: 14px; }
+  .lineControls { margin-top: 8px; padding-top: 0; gap: 4px 12px; }
+  .quantity button { width: 40px; height: 44px; }
+  .quantity output { min-width: 16px; }
+  .summary { padding: 28px 24px; }
+  .summary h2 { margin-bottom: 32px; }
+  .empty { margin-top: 24px; min-height: 410px; padding-block: 48px; }
+  .empty h2 { font-size: clamp(40px, 10.5vw, 64px); }
+  .empty > p:last-of-type { font-size: 14px; }
+  .discoverHeading { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .discoverGrid { grid-template-columns: minmax(0, 1fr); gap: 48px; }
+  .discoverImage { aspect-ratio: 1; }
+}

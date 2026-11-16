@@ -1,0 +1,81 @@
+.section {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 20px;
+  padding: clamp(120px, 16vw, 260px) var(--page-gutter) clamp(96px, 10vw, 160px);
+}
+
+.intro { grid-column: 1 / span 4; }
+
+.title {
+  margin: 0;
+  font-family: var(--font-marcellus), Georgia, serif;
+  font-size: clamp(52px, 5.5vw, 96px);
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: -0.045em;
+  text-wrap: balance;
+}
+
+.title span { display: block; }
+.questions { grid-column: 6 / -1; min-width: 0; }
+.item { border-top: 1px solid rgb(255 255 255 / 18%); }
+.item:last-child { border-bottom: 1px solid rgb(255 255 255 / 18%); }
+.question { margin: 0; font-size: clamp(18px, 1.4vw, 22px); font-weight: 400; line-height: 1.4; }
+
+.trigger,
+.answer {
+  width: 100%;
+  border: 0;
+  color: inherit;
+  background: transparent;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.trigger {
+  display: flex;
+  min-height: 80px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  padding: 26px 0;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  transition: opacity 180ms ease;
+}
+
+.trigger:hover { opacity: 0.75; }
+.trigger:focus-visible,
+.answer:focus-visible { outline: 1px solid currentColor; outline-offset: 4px; }
+
+.icon { width: 24px; height: 24px; flex-shrink: 0; stroke: currentColor; stroke-width: 1; }
+.verticalStroke { transform-origin: 12px 12px; transition: transform 180ms ease; }
+.item[data-open="true"] .verticalStroke { transform: rotate(90deg); }
+
+.answer {
+  display: block;
+  min-height: 44px;
+  padding: 0 56px 28px 0;
+  color: #dedcd9;
+  font-size: 17px;
+  line-height: 1.6;
+  letter-spacing: -0.015em;
+  text-wrap: pretty;
+  transition: color 180ms ease;
+}
+
+.answerText { display: block; max-width: 64ch; }
+.answer:hover { color: var(--foreground); }
+.srOnly { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+@media (max-width: 700px) {
+  .section { grid-template-columns: 1fr; gap: 48px; padding-top: 100px; padding-bottom: 80px; }
+  .intro,
+  .questions { grid-column: 1; }
+  .title { font-size: clamp(48px, 13vw, 72px); }
+  .trigger { min-height: 76px; gap: 20px; padding-block: 24px; }
+  .answer { padding-right: 0; font-size: 16px; }
+}

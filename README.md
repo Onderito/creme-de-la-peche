@@ -1,5 +1,11 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Intégration Shopify
+
+La connexion Storefront et les services catalogue sont documentés dans
+[lib/shopify/README.md](lib/shopify/README.md), avec les URL de vérification locale
+et les commandes de test. Le front visuel et le panier restent à implémenter.
+
 ## Getting Started
 
 First, run the development server:

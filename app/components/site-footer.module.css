@@ -1,0 +1,84 @@
+.footer {
+  padding: 0 var(--page-gutter) 20px;
+  color: #2a2a2a;
+  background: #e9e2d6;
+}
+
+.top {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 40px;
+  padding-top: clamp(48px, 5vw, 80px);
+  border-top: 1px solid rgb(0 0 0 / 15%);
+}
+
+.tagline {
+  margin: 0;
+  font-family: var(--font-marcellus), Georgia, serif;
+  font-size: clamp(36px, 3.3vw, 56px);
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+}
+
+.tagline span { display: block; }
+
+.footer a {
+  min-height: 44px;
+  transition: opacity 180ms ease;
+}
+
+.footer a:hover { opacity: 0.65; }
+
+.contact {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 20px;
+  font-size: 14px;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+
+.contact svg { width: 14px; height: 14px; stroke: currentColor; stroke-width: 1; }
+.navigation { min-width: 0; }
+.navTitle { margin: 0 0 12px; font-size: 14px; font-weight: 600; line-height: 1.5; }
+.navigation ul { margin: 0; padding: 0; list-style: none; }
+.navigation a { display: inline-flex; align-items: center; color: #514b45; font-size: 15px; line-height: 1.4; }
+
+.brand {
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  margin: clamp(64px, 8vw, 128px) auto 44px;
+  font-family: var(--font-marcellus), Georgia, serif;
+  font-size: clamp(64px, 10.2vw, 180px);
+  line-height: 1.1;
+  letter-spacing: -0.055em;
+  white-space: nowrap;
+}
+
+.bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding-top: 16px;
+  border-top: 1px solid rgb(0 0 0 / 15%);
+  color: #514b45;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.bottom p { margin: 0; }
+.policies { display: flex; flex-wrap: wrap; gap: 0 24px; }
+.policies a { display: inline-flex; align-items: center; }
+
+@media (max-width: 700px) {
+  .top { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px 24px; padding-top: 40px; }
+  .intro { grid-column: 1 / -1; }
+  .navigation a { font-size: 14px; }
+  .brand { width: 100%; margin: 64px 0 32px; font-size: clamp(48px, 18vw, 110px); line-height: 0.95; white-space: normal; }
+  .brand span { display: block; }
+  .bottom { align-items: flex-start; flex-direction: column; gap: 16px; padding-top: 12px; }
+  .policies { order: -1; gap: 0 20px; }
+}

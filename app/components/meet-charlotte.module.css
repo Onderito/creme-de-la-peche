@@ -1,0 +1,216 @@
+.section {
+  padding: 0 var(--page-gutter) 43px;
+  color: var(--foreground);
+  background: var(--background);
+}
+
+.intro {
+  padding-block: clamp(160px, 21.875vw, 378px) clamp(160px, 19.56vw, 338px);
+  margin-bottom: clamp(64px, 6vw, 100px);
+  text-align: center;
+}
+
+.intro,
+.paperPause {
+  margin-inline: calc(-1 * var(--page-gutter));
+  padding-inline: var(--page-gutter);
+  color: #2a2a2a;
+  background: #e9e2d6;
+}
+
+.introTitle,
+.chapterTitle {
+  margin: 0;
+  font-family: var(--font-marcellus), Georgia, serif;
+  font-size: clamp(64px, 8.68056vw, 150px);
+  font-weight: 400;
+  line-height: 0.8;
+}
+
+.introTitle { color: inherit; letter-spacing: -0.04em; }
+.introTitle span, .behindTitle span { display: block; }
+
+.chapter {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: 20px;
+  align-items: start;
+}
+
+.chapterTitle { z-index: 2; letter-spacing: -0.06em; }
+
+.wallImage,
+.portraitImage,
+.drawingImage,
+.galleryImage {
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  outline: 1px solid rgb(255 255 255 / 10%);
+  outline-offset: -1px;
+}
+
+.wallImage {
+  z-index: 2;
+  grid-column: 9 / -1;
+  grid-row: 1;
+  aspect-ratio: 3 / 2;
+  margin-top: 30vw;
+}
+
+.wallPhoto,
+.portraitPhoto {
+  object-fit: cover;
+}
+
+.portraitImage {
+  z-index: 1;
+  grid-column: 4 / span 7;
+  grid-row: 1;
+  aspect-ratio: 3 / 2;
+  margin-top: 3vw;
+}
+
+.portraitPhoto {
+  object-position: 50% 42%;
+}
+
+.behindTitle { grid-column: 1 / span 5; grid-row: 1; white-space: nowrap; }
+
+.signature {
+  z-index: 3;
+  grid-column: 4 / span 2;
+  grid-row: 1;
+  margin: 43vw 0 0;
+  color: #fff;
+  font-family: var(--font-oooh-baby), cursive;
+  font-size: 24px;
+  line-height: 29px;
+}
+
+.copy h4 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.375;
+  letter-spacing: -0.02em;
+}
+
+.copy p {
+  margin: 8px 0 0;
+  font-size: 18px;
+  line-height: 1.38889;
+  letter-spacing: -0.02em;
+  text-wrap: pretty;
+}
+
+.behindCopy {
+  grid-column: 2 / span 4;
+  grid-row: 1;
+  margin-top: 46vw;
+}
+
+.firstLines { margin-top: clamp(120px, 19.9074vw, 344px); }
+
+.drawingImage {
+  grid-column: 4 / span 6;
+  grid-row: 1;
+  aspect-ratio: 3 / 2;
+}
+
+.drawingImage img, .galleryImage img { object-fit: cover; }
+
+.firstTitle {
+  grid-column: 1 / span 6;
+  grid-row: 1;
+  margin-top: 1.85185vw;
+  white-space: nowrap;
+}
+
+.firstCopy {
+  grid-column: 10 / span 3;
+  grid-row: 1;
+  margin-top: 10.06944vw;
+}
+
+.firstCopy p { max-width: 295px; }
+
+.paperPause {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: clamp(64px, 6vw, 100px);
+  margin-bottom: clamp(64px, 6vw, 100px);
+  padding-block: clamp(96px, 12vw, 180px);
+  text-align: center;
+}
+
+.paperTitle { line-height: 0.95; text-wrap: balance; }
+
+.paperCopy {
+  max-width: 48ch;
+  margin: 32px 0 0;
+  font-size: 20px;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.paperCopy span { display: block; }
+
+.paperPause :global(.collection-button) { color: #e9e2d6; background: #2a2a2a; }
+.paperPause :global(.collection-button:hover) { background: #45403b; }
+.paperPause :global(.collection-button:focus-visible) { outline-color: #2a2a2a; }
+
+.galleryImage {
+  grid-column: 1 / span 8;
+  grid-row: 1;
+  aspect-ratio: 3 / 2;
+}
+
+.placeTitle {
+  grid-column: 1 / -1;
+  grid-row: 1;
+  justify-self: start;
+  width: min(100%, 1228px);
+  margin-top: 1.85185vw;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.placeCopy { grid-column: 9 / -1; grid-row: 1; margin-top: 28.06713vw; }
+
+@media (max-width: 700px) {
+  .section { padding-bottom: 60px; }
+  .intro {
+    display: flex;
+    min-height: 100vh;
+    min-height: 100svh;
+    align-items: center;
+    justify-content: center;
+    padding-block: 0;
+  }
+  .introTitle { font-size: clamp(64px, 17vw, 100px); line-height: 0.83; }
+  .chapter { column-gap: 12px; }
+  .chapterTitle { font-size: clamp(48px, 13.333vw, 80px); line-height: 0.92; }
+  .behindTitle { grid-column: 1 / -1; grid-row: 1; margin-bottom: 24px; }
+  .wallImage { grid-column: 5 / -1; grid-row: 3; margin-top: -24px; }
+  .portraitImage { grid-column: 1 / -1; grid-row: 2; margin-top: 0; }
+  .signature { grid-column: 2 / span 3; grid-row: 3; margin: 12px 0 0; font-size: 20px; }
+  .copy h4 { font-size: 18px; line-height: 1.4; }
+  .copy p { font-size: 14px; line-height: 1.6; }
+  .behindCopy { grid-column: 1 / -1; grid-row: 4; margin-top: 28px; }
+  .behindCopy h4 { font-size: 20px; }
+  .behindCopy p { font-size: 16px; line-height: 1.6; }
+  .firstLines { margin-top: 100px; }
+  .firstTitle { grid-column: 1 / -1; grid-row: 1; margin: 0 0 24px; }
+  .drawingImage { grid-column: 3 / -1; grid-row: 2; }
+  .firstCopy { grid-column: 1 / span 9; grid-row: 3; margin-top: 28px; }
+  .paperPause { padding-block: 96px; }
+  .paperCopy { margin-top: 24px; font-size: 18px; }
+  .placeTitle { grid-column: 1 / -1; grid-row: 1; width: 100%; margin: 0 0 24px; white-space: normal; text-wrap: balance; }
+  .galleryImage { grid-column: 1 / span 10; grid-row: 2; }
+  .placeCopy { grid-column: 3 / -1; grid-row: 3; margin-top: 28px; }
+}

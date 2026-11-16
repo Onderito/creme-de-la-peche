@@ -1,0 +1,32 @@
+import type { ProductVariant } from "./product-types";
+import type { ShopifyConnection, ShopifyMoney } from "./storefront-types";
+
+export interface CartLine {
+  id: string;
+  quantity: number;
+  instructions: { canRemove: boolean; canUpdateQuantity: boolean };
+  merchandise: ProductVariant & {
+    product: { title: string; handle: string; onlineStoreUrl: string | null; options: { name: string; values: string[] }[] };
+  };
+  cost: { amountPerQuantity: ShopifyMoney; totalAmount: ShopifyMoney };
+}
+/** Private transport shape. Never pass to a Client Component. */
+export interface ShopifyCart {
+  id: string;
+  checkoutUrl: string;
+  totalQuantity: number;
+  cost: { subtotalAmount: ShopifyMoney; totalAmount: ShopifyMoney };
+  lines: CartLine[];
+}
+export interface CartConnection extends Omit<ShopifyCart, "lines"> {
+  lines: ShopifyConnection<CartLine>;
+}
+export interface PublicCart extends Omit<ShopifyCart, "id" | "checkoutUrl" | "lines"> {
+  lines: (CartLine & { isOriginal: boolean })[];
+}
+export interface CartActionState { message: string; error?: boolean }
+export interface CartMutationPayload {
+  cart: { id: string } | null;
+  userErrors: { code: string | null; field: string[] | null; message: string }[];
+  warnings: { code: string; message: string }[];
+}
