@@ -24,7 +24,16 @@ export interface CartConnection extends Omit<ShopifyCart, "lines"> {
 export interface PublicCart extends Omit<ShopifyCart, "id" | "checkoutUrl" | "lines"> {
   lines: (CartLine & { isOriginal: boolean })[];
 }
-export interface CartActionState { message: string; error?: boolean }
+export interface CartConfirmation {
+  title: string;
+  options: string;
+  quantity: number;
+  price: ShopifyMoney;
+  image: { url: string; altText: string | null } | null;
+  alreadyInCart: boolean;
+  warning?: string;
+}
+export interface CartActionState { message: string; error?: boolean; confirmation?: CartConfirmation }
 export interface CartMutationPayload {
   cart: { id: string } | null;
   userErrors: { code: string | null; field: string[] | null; message: string }[];

@@ -7,9 +7,9 @@ const groups = [
   {
     title: "Shop",
     links: [
-      { label: "Original drawings", href: `${shopUrl}/collections/creme-de-la-peche` },
-      { label: "Prints", href: `${shopUrl}/collections/prints` },
-      { label: "Clothing", href: `${shopUrl}/collections/shop` },
+      { label: "Original drawings", href: "/collections/creme-de-la-peche" },
+      { label: "Prints", href: "/collections/prints" },
+      { label: "Clothing", href: "/collections/shop" },
     ],
   },
   {

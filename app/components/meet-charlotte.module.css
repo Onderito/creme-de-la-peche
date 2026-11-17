@@ -29,6 +29,7 @@
 
 .introTitle { color: inherit; letter-spacing: -0.04em; }
 .introTitle span, .behindTitle span { display: block; }
+.introSubtitle { margin: 32px 0 0; font-size: 18px; line-height: 1.4; }
 
 .chapter {
   display: grid;
@@ -188,11 +189,12 @@
     display: flex;
     min-height: 100vh;
     min-height: 100svh;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     padding-block: 0;
   }
-  .introTitle { font-size: clamp(64px, 17vw, 100px); line-height: 0.83; }
+  .introTitle { font-size: clamp(32px, 9vw, 63px); line-height: 0.95; }
   .chapter { column-gap: 12px; }
   .chapterTitle { font-size: clamp(48px, 13.333vw, 80px); line-height: 0.92; }
   .behindTitle { grid-column: 1 / -1; grid-row: 1; margin-bottom: 24px; }

@@ -3,22 +3,26 @@ import { ProductShowcase } from "./components/product-showcase";
 import { MeetCharlotte } from "./components/meet-charlotte";
 import { SiteHeader } from "./components/site-header";
 import { Faq } from "./components/faq";
+import introStyles from "./components/intro-loader.module.css";
 
 const studioDetails = [
-  { value: "Original", label: "Drawings by hand" },
+  { value: "Original", label: "Drawn by hand" },
   { value: "Wearable", label: "Art for your everyday" },
-  { label: "Signed by me" },
+  { label: "Originals signed by me" },
   { label: "Carefully packed,", secondLine: "shipped from France" },
 ];
 
 export default function Home() {
   return (
     <main id="top">
+      <div className={introStyles.screen} aria-hidden="true">
+        <span className={introStyles.signature}>crème de la pêche</span>
+      </div>
       <a className="skip-link" href="#studio">Skip to the studio</a>
+      <SiteHeader home />
 
       <section className="hero" aria-labelledby="hero-title">
         <div className="hero-panel">
-          <SiteHeader />
 
           <div className="hero-copy">
             <h1 id="hero-title">
@@ -26,7 +30,7 @@ export default function Home() {
               <span>Art to keep.</span>
             </h1>
             <p className="hero-description">
-              My drawings. On paper, on prints, on you.
+              My drawings, from paper to prints and pieces you can wear.
               <br />
               Feminine, sensual, a little bold.
             </p>
@@ -60,9 +64,9 @@ export default function Home() {
       <section className="studio" aria-label="My studio">
         <div className="studio-story" id="studio">
           <p>
-            I draw women the way I see them. Soft, bold, and entirely at ease.
-            Everything starts with a line, drawn by hand. Some drawings find a
-            place on your wall. Others become the tee or sweatshirt you live in.
+            I’ve always drawn women. Their faces, their expressions, the details
+            that make them who they are. My drawings find their way onto paper,
+            prints, tees and sweatshirts.
           </p>
         </div>
         <ul className="studio-details" aria-label="From my studio">
@@ -82,8 +86,8 @@ export default function Home() {
         <header className="collections-intro">
           <h2 id="collections-title">Pieces of my world.</h2>
           <p>
-            My originals on paper, a little pink, and drawings you can wear.
-            Find a piece of my world to make your own.
+            Original drawings, art prints and pieces made to wear.
+            Find the one that feels like you.
           </p>
         </header>
         <Suspense fallback={<p className="catalog-message" role="status">Loading the collections…</p>}>

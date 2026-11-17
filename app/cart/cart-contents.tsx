@@ -77,9 +77,8 @@ export function CartContents({ cart, notice }: { cart: PublicCart | null; notice
         </div>
       ) : (
         <div className={styles.empty}>
-          <p className={styles.eyebrow}>Room for something you love.</p>
-          <h2>Your next favourite<br />is waiting.</h2>
-          <p>My originals, prints and drawings to wear.<br />Find a piece that feels like you.</p>
+          <h2>Your cart is empty.</h2>
+          <p>Explore my drawings, prints and pieces to wear.</p>
           <Link className={styles.emptyButton} href="/#collections">Explore my collections</Link>
         </div>
       )}

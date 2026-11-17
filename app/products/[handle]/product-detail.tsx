@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useActionState, useId, useState, type ReactNode } from "react";
+import { useCartConfirmation } from "@/app/components/cart-confirmation";
 import { changeCart } from "@/app/actions/cart-actions";
 import { formatMoney } from "@/lib/shopify/format-money";
 import type { ProductVariant } from "@/lib/shopify/types/product-types";
@@ -27,7 +28,13 @@ export function ProductDetail({ product, children }: { product: ProductData; chi
   const selected = product.variants.find((variant) => variant.id === selectedId) ?? initial;
   const [activeImage, setActiveImage] = useState(initial?.image ?? product.images[0]);
   const [quantity, setQuantity] = useState(String(initial?.quantityRule.minimum ?? 1));
-  const [state, action, pending] = useActionState(changeCart, { message: "" });
+  const showConfirmation = useCartConfirmation();
+  const [state, action, pending] = useActionState(async (previous: Parameters<typeof changeCart>[0], form: FormData) => {
+    const trigger = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    const result = await changeCart(previous, form);
+    if (result.confirmation) showConfirmation(result.confirmation, trigger);
+    return result;
+  }, { message: "" });
   const options = product.options.filter((option) => option.values.length > 1);
   const quantityId = useId();
   const amount = product.isOriginal ? 1 : Number(quantity);
@@ -68,7 +75,7 @@ export function ProductDetail({ product, children }: { product: ProductData; chi
           <input type="hidden" name="operation" value="add" />
           <input type="hidden" name="handle" value={product.handle} />
           <input type="hidden" name="variantId" value={selected?.id ?? ""} />
-          <input type="hidden" name="goToCart" value="true" />
+
           <fieldset className={styles.purchaseFields} disabled={pending}>
             <legend className={styles.srOnly}>Choose your piece</legend>
             {options.map((option, optionIndex) => <fieldset className={styles.optionGroup} key={option.name}>
@@ -93,7 +100,7 @@ export function ProductDetail({ product, children }: { product: ProductData; chi
               {pending ? "Adding…" : selected?.availableForSale ? "Add to cart" : "Sold out"}
             </button>
           </fieldset>
-          <p className={styles.feedback} role="status">{state.message}</p>
+          <p className={styles.feedback} role="status">{state.error ? state.message : ""}</p>
           <p className={styles.shippingNote}>{selected?.availableForSale ? "Shipping and any applicable taxes are calculated at checkout." : "This piece is currently unavailable."}</p>
         </form>
         {children}

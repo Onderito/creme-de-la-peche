@@ -29,7 +29,7 @@ const questions = [
   {
     id: "sizing",
     question: "How do I choose my size?",
-    answer: "Check the measurements in the product description and compare them with a tee or sweatshirt you already love. Think about the fit you like, too: close to the body or a little more relaxed.",
+    answer: "Check the size guide on the product page and compare the measurements with a piece you already own.",
   },
   {
     id: "returns",

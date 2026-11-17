@@ -83,7 +83,7 @@ function CollectionHeading({ id, title, description, handle, cta }: {
         <h3 id={id}>{title}</h3>
         <p>{description}</p>
       </div>
-      <a className="collection-view-all" href={`${STOREFRONT_URL}/collections/${handle}`}>{cta}</a>
+      <Link className="collection-view-all" href={`/collections/${handle}`}>{cta}</Link>
     </header>
   );
 }
@@ -133,17 +133,17 @@ export async function ProductShowcase() {
           <div className="artwork-secondary">
             {secondArtwork && <ProductCard product={secondArtwork} original />}
           </div>
-          <a className="collection-view-all artworks-view-all" href={`${STOREFRONT_URL}/collections/creme-de-la-peche`}>
+          <Link className="collection-view-all artworks-view-all" href="/collections/creme-de-la-peche">
             View all artworks
-          </a>
+          </Link>
         </div>
       </section>
 
       <section className="collection-group" aria-labelledby="prints-title">
         <CollectionHeading
           id="prints-title"
-          title="Crème de la Pêche"
-          description="My world in pink. Soft lines, bolder moods."
+          title="Prints"
+          description="My drawings in print, in shades of pink."
           handle="prints"
           cta="View the pink series"
         />
@@ -156,7 +156,7 @@ export async function ProductShowcase() {
         <CollectionHeading
           id="clothing-title"
           title="Clothing"
-          description="My drawings, your favourite tee or sweatshirt."
+          description="My drawings on tees and sweatshirts."
           handle="shop"
           cta="View all clothing"
         />

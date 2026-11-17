@@ -12,10 +12,14 @@ import type { CartActionState } from "@/lib/shopify/types/cart-types";
 export async function changeCart(_previous: CartActionState, form: FormData): Promise<CartActionState> {
   const operation = form.get("operation");
   let message = "";
+  let confirmation: CartActionState["confirmation"];
   try {
     const ip = await buyerIp();
     const [cart, originalHandles] = await Promise.all([getCart(await readCartId(), ip), getOriginalArtworkHandles()]);
     let payload;
+    let selectedVariantId: string | undefined;
+    let selectedHandle: string | undefined;
+    let alreadyInCart = false;
     if (operation === "add") {
       const handle = form.get("handle");
       const variantId = form.get("variantId");
@@ -32,6 +36,9 @@ export async function changeCart(_previous: CartActionState, form: FormData): Pr
       }
       const originalIssue = originalHandles.includes(handle) ? originalCartIssue(quantity, handle, cart?.lines ?? []) : null;
       if (originalIssue === "quantity") return { message: "This original is one of a kind. Only one per cart.", error: true };
+      selectedVariantId = variant.id;
+      selectedHandle = handle;
+      alreadyInCart = originalIssue === "duplicate";
       const lines = [{ merchandiseId: variant.id, quantity }];
       // Repeated additions open the existing cart without increasing its quantity.
       payload = originalIssue === "duplicate" && cart
@@ -64,17 +71,32 @@ export async function changeCart(_previous: CartActionState, form: FormData): Pr
     if (payload.cart) await saveCartId(payload.cart.id);
     revalidatePath("/cart");
     if (payload.userErrors.length) {
-      return { message: "Shopify couldn’t complete this change. Check the available options and quantities, then try again.", error: true };
+      return { message: "We couldn’t update your cart. Check the available options and quantities, then try again.", error: true };
     }
     if (!payload.cart) return { message: "Your cart is no longer available. Please refresh and try again.", error: true };
-    if (!await getCart(payload.cart.id, ip)) {
+    const updatedCart = await getCart(payload.cart.id, ip);
+    if (!updatedCart) {
       return { message: "Your cart is no longer available. Please refresh and try again.", error: true };
     }
-    if (payload.warnings.length) message = "Shopify adjusted your selection to match availability. Please review your cart.";
+    if (payload.warnings.length) message = "Your cart has changed. Please check your selection before continuing.";
+    if (operation === "add") {
+      const line = updatedCart.lines.find((item) => alreadyInCart ? item.merchandise.product.handle === selectedHandle : item.merchandise.id === selectedVariantId);
+      if (!line) return { message: message || "This piece could not be added. Please check your cart.", error: true };
+      const variant = line.merchandise;
+      confirmation = {
+        title: variant.product.title,
+        options: variant.selectedOptions.filter((option) => variant.product.options.some((item) => item.name === option.name && item.values.length > 1)).map((option) => option.value).join(" / "),
+        quantity: line.quantity,
+        price: line.cost.totalAmount,
+        image: variant.image ? { url: variant.image.url, altText: variant.image.altText } : null,
+        alreadyInCart,
+        warning: message || undefined,
+      };
+    }
   } catch {
     revalidatePath("/cart");
     return { message: "We couldn’t confirm the change. Refresh your cart before trying again.", error: true };
   }
   if (operation === "add" && form.get("goToCart") === "true") redirect(message ? "/cart?notice=adjusted" : "/cart");
-  return { message };
+  return { message, confirmation };
 }

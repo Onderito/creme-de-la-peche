@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import drawingDetail from "../../public/images/charlotte/charlotte-drawing-detail.webp";
 import portrait from "../../public/images/charlotte/charlotte-studio-portrait.webp";
 import firstLines from "../../public/images/charlotte/charlotte-first-lines.webp";
@@ -10,9 +11,10 @@ export function MeetCharlotte() {
     <section id="charlotte" className={styles.section} aria-labelledby="charlotte-title">
       <header className={styles.intro}>
         <h2 id="charlotte-title" className={styles.introTitle}>
-          <span>I’m</span>
-          <span>Charlotte</span>
+          <span>From my hands</span>
+          <span>to yours.</span>
         </h2>
+        <p className={styles.introSubtitle}>Artist &amp; tattooist</p>
       </header>
 
       <section className={`${styles.chapter} ${styles.behind}`} aria-labelledby="behind-drawings-title">
@@ -42,9 +44,8 @@ export function MeetCharlotte() {
         <div className={`${styles.copy} ${styles.behindCopy}`}>
           <h4>A lifelong instinct.</h4>
           <p>
-            I’m an artist and tattooist, and I’ve drawn for as long as I can
-            remember. My world is feminine, sensual, a little bold. Every
-            drawing is my own, made by hand.
+            I’ve been drawing for as long as I can remember. Over time, it
+            became more than something I loved doing. It became my work.
           </p>
         </div>
       </section>
@@ -62,8 +63,8 @@ export function MeetCharlotte() {
         <div className={`${styles.copy} ${styles.firstCopy}`}>
           <h4>It started at home.</h4>
           <p>
-            Three years ago, I decided to make a living from my art. I
-            started in my apartment, with my own drawings.
+            Three years ago, I decided to see if I could make a living from my
+            art. I started from my apartment, with my own drawings.
           </p>
         </div>
       </section>
@@ -71,15 +72,15 @@ export function MeetCharlotte() {
       <section id="paper-first" className={styles.paperPause} aria-labelledby="paper-first-title">
         <h3 id="paper-first-title" className={`${styles.chapterTitle} ${styles.paperTitle}`}>Paper first.</h3>
         <p className={styles.paperCopy}>
-          <span>Everything starts with one of my drawings.</span>
-          <span>Find the one that speaks to you.</span>
+          <span>Every original begins on paper.</span>
+          <span>Find one you’d like to keep.</span>
         </p>
-        <a className="collection-button" href="https://cremedelapeche.shop/collections/creme-de-la-peche">
+        <Link className="collection-button" href="/collections/creme-de-la-peche">
           Explore my originals
           <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
             <path d="M4 16 16 4M5 4h11v11" />
           </svg>
-        </a>
+        </Link>
       </section>
 
       <section className={`${styles.chapter} ${styles.place}`} aria-labelledby="place-title">
@@ -95,8 +96,8 @@ export function MeetCharlotte() {
         <div className={`${styles.copy} ${styles.placeCopy}`}>
           <h4>Room to grow.</h4>
           <p>
-            A year later, I opened my own studio and built a clientele around
-            my work. A place to draw, tattoo and bring my own ideas to life.
+            A year later, I opened my own studio. It gave me a place to draw,
+            tattoo and welcome the people who connect with my work.
           </p>
         </div>
       </section>

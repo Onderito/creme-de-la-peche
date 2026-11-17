@@ -33,7 +33,7 @@ async function Selection({ searchParams }: { searchParams: Promise<{ checkout?: 
     ? "Checkout is temporarily unavailable. Your selection is saved. Please try again."
     : query.checkout === "unique" ? "Original artworks are one of a kind. Remove any extra copies before checking out."
     : query.checkout === "empty" ? "Add a piece to your cart before checking out."
-    : query.notice === "adjusted" ? "Shopify adjusted your selection to match availability. Please review your cart."
+    : query.notice === "adjusted" ? "Your cart has changed. Please check your selection before continuing."
     : id && !cart ? "Your previous cart has expired. Find your next favourite below." : undefined;
   return <CartContents cart={cart ? publicCart(cart, new Set(originals)) : null} notice={notice} />;
 }

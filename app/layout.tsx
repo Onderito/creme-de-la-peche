@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Marcellus, Open_Sans, Oooh_Baby } from "next/font/google";
+import { CartConfirmationProvider } from "./components/cart-confirmation";
 import { SiteFooter } from "./components/site-footer";
 import "./globals.css";
 
@@ -36,8 +37,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${openSans.variable} ${marcellus.variable} ${ooohBaby.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        {children}
-        <SiteFooter />
+        <CartConfirmationProvider>
+          {children}
+          <SiteFooter />
+        </CartConfirmationProvider>
       </body>
     </html>
   );
