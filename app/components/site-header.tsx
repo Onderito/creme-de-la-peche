@@ -1,12 +1,12 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import Link from "next/link";
 import { collectionLinks } from "@/lib/shopify/collection-pages";
 
 const shopUrl = "https://cremedelapeche.shop";
 
-export function SiteHeader({ home = false }: { home?: boolean }) {
+export function SiteHeader({ home = false, cartCount }: { home?: boolean; cartCount?: ReactNode }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [collectionsOpen, setCollectionsOpen] = useState(false);
   const [pastHero, setPastHero] = useState(!home);
@@ -111,7 +111,7 @@ export function SiteHeader({ home = false }: { home?: boolean }) {
           </nav>
         </div>
         <a className="desktop-account" href={`${shopUrl}/account`}>Account</a>
-        <Link className="cart-link" href="/cart">Cart</Link>
+        <Link className="cart-link" href="/cart">Cart{cartCount}</Link>
       </div>
     </header>
   );

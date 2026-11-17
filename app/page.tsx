@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import { ProductShowcase } from "./components/product-showcase";
 import { MeetCharlotte } from "./components/meet-charlotte";
 import { SiteHeader } from "./components/site-header";
+import { CartCount } from "./components/cart-count";
 import { Faq } from "./components/faq";
 import { HomeMotion } from "./components/home-motion";
 import { JsonLd } from "./components/json-ld";
@@ -24,14 +25,14 @@ export default function Home() {
         { "@type": "Organization", "@id": `${siteUrl}/#organization`, name: siteName, url: siteUrl, logo: absoluteUrl("/images/brand/logo-beige.png") },
       ] }} />
       <a className="skip-link" href="#studio">Skip to the studio</a>
-      <SiteHeader home />
+      <SiteHeader home cartCount={<Suspense fallback={null}><CartCount /></Suspense>} />
 
       <section className="hero" aria-labelledby="hero-title">
         <div className="hero-panel">
 
           <div className="hero-copy">
             <h1 id="hero-title">
-              <span className="hero-line-mask"><span className="hero-line">Art to wear.</span></span>
+              <span className="hero-line-mask"><span className="hero-line">Art to wear.</span></span>{" "}
               <span className="hero-line-mask"><span className="hero-line">Art to keep.</span></span>
             </h1>
             <p className="hero-description">

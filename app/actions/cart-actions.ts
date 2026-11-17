@@ -1,7 +1,7 @@
 "use server";
 
 import { visibleVariantOptions, variantOptionsLabel } from "@/lib/shopify/variant-labels";
-import { revalidatePath } from "next/cache";
+import { refresh, revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { getProduct } from "@/lib/shopify/catalog/product-service";
 import { getOriginalArtworkHandles } from "@/lib/shopify/catalog/original-artworks";
@@ -72,6 +72,8 @@ export async function changeCart(_previous: CartActionState, form: FormData): Pr
     } else return { message: "Please try again.", error: true };
     if (payload.cart) await saveCartId(payload.cart.id);
     revalidatePath("/cart");
+    // Keeps the header cart count in sync on the current page.
+    refresh();
     if (payload.userErrors.length) {
       return { message: "We couldn’t update your cart. Check the available options and quantities, then try again.", error: true };
     }

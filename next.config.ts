@@ -8,6 +8,7 @@ const nextConfig: NextConfig = {
     return [
       { source: "/collections/artworks", destination: "/collections/creme-de-la-peche", permanent: true },
       { source: "/collections/artworks/art", destination: "/collections/creme-de-la-peche", permanent: true },
+      { source: "/products/copy-of-oversize-hoodie-n-51", destination: "/products/oversized-hoodie-n-51", permanent: true },
       { source: "/collections/:collection/products/:handle", destination: "/products/:handle", permanent: true },
     ];
   },

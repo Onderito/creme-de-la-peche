@@ -1,6 +1,7 @@
-import { SiteHeader } from "./site-header";
-import styles from "./store-header.module.css";
+import { Suspense } from "react";
+import { CartCount } from "./cart-count";
+import { StoreHeaderBase } from "./store-header-base";
 
 export function StoreHeader() {
-  return <div className={styles.header}><SiteHeader /></div>;
+  return <StoreHeaderBase cartCount={<Suspense fallback={null}><CartCount /></Suspense>} />;
 }

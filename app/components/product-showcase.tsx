@@ -108,7 +108,7 @@ export async function ProductShowcase() {
   }
 
   const [firstArtwork, secondArtwork, prints, clothing] = catalog;
-  const clothingOrder = ["oversized-tee-n-51", "copy-of-oversize-hoodie-n-51"];
+  const clothingOrder = ["oversized-tee-n-51", "oversized-hoodie-n-51"];
   const clothingProducts = [...(clothing?.products.nodes ?? [])]
     .filter((product) => product.featuredImage)
     .sort((a, b) => {

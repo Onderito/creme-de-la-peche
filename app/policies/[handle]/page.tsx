@@ -4,8 +4,8 @@ import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { StoreHeader } from "@/app/components/store-header";
 import { pageMetadata, siteName } from "@/lib/seo";
-import { isPolicyHandle, policies, policyLinks } from "@/lib/shopify/policies";
-import { getPolicy } from "@/lib/shopify/policy-service";
+import { isPolicyHandle, policies } from "@/lib/shopify/policies";
+import { getLegalLinks, getPolicy } from "@/lib/shopify/policy-service";
 import { CART_COOKIE_DAYS, CART_COOKIE_NAME } from "@/lib/shopify/cart/cart-cookie-policy";
 import styles from "./policy.module.css";
 
@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 async function Policy({ params }: Props) {
   const { handle } = await params;
   if (!isPolicyHandle(handle)) notFound();
-  const policy = await getPolicy(handle);
+  const [policy, legalLinks] = await Promise.all([getPolicy(handle), getLegalLinks()]);
   if (!policy) notFound();
   return <article>
     <p className={styles.eyebrow}>Crème de la pêche / Information</p>
@@ -37,7 +37,7 @@ async function Policy({ params }: Props) {
       <p>Shopify may use additional cookies on its hosted checkout and customer account pages. You can delete this storefront’s cart cookie through your browser settings; doing so removes this browser’s link to your saved cart.</p>
     </section>}
     <nav className={styles.links} aria-label="Shop policies">
-      {policyLinks.map(({ href, label }) => <Link href={href} key={href} aria-current={href === `/policies/${handle}` ? "page" : undefined}>{label}</Link>)}
+      {legalLinks.map(({ href, label }) => <Link href={href} key={href} aria-current={href === `/policies/${handle}` ? "page" : undefined}>{label}</Link>)}
     </nav>
   </article>;
 }

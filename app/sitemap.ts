@@ -4,10 +4,11 @@ import { collectionLinks } from "@/lib/shopify/collection-pages";
 import { getProducts } from "@/lib/shopify/catalog/product-service";
 import { collectConnection } from "@/lib/shopify/catalog/catalog-pagination";
 import { productPath } from "@/lib/shopify/product-path";
-import { policyLinks } from "@/lib/shopify/policies";
+import { getLegalLinks } from "@/lib/shopify/policy-service";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const first = await getProducts({ first: 100 });
+  const legalLinks = await getLegalLinks();
   const products = await collectConnection(first, (after) => getProducts({ first: 100, after }));
   return [
     { url: absoluteUrl("/"), priority: 1 },
@@ -17,6 +18,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       ...(product.featuredImage ? { images: [socialImage(product.featuredImage).url] } : {}),
       priority: 0.7,
     })),
-    ...policyLinks.map(({ href }) => ({ url: absoluteUrl(href), priority: 0.2 })),
+    ...legalLinks.map(({ href }) => ({ url: absoluteUrl(href), priority: 0.2 })),
   ];
 }

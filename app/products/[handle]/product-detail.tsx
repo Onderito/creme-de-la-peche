@@ -87,7 +87,7 @@ export function ProductDetail({ product, children }: { product: ProductData; chi
           <fieldset className={styles.purchaseFields} disabled={pending}>
             <legend className={styles.srOnly}>Choose your piece</legend>
             {options.map((option, optionIndex) => <fieldset className={styles.optionGroup} key={option.name}>
-              <legend>{option.name}<span>{selected?.selectedOptions.find((item) => item.name === option.name)?.value}</span></legend>
+              <legend>{option.name.charAt(0).toUpperCase() + option.name.slice(1)}<span>{selected?.selectedOptions.find((item) => item.name === option.name)?.value}</span></legend>
               <div className={styles.options}>
                 {option.values.map((value) => {
                   const available = product.variants.some((variant) => variant.availableForSale && variant.selectedOptions.some((item) => item.name === option.name && item.value === value) && options.slice(0, optionIndex).every((previous) => variant.selectedOptions.some((item) => item.name === previous.name && item.value === selected?.selectedOptions.find((current) => current.name === previous.name)?.value)));
