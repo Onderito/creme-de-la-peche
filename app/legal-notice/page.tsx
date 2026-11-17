@@ -12,11 +12,12 @@ export const metadata = pageMetadata({ title: "Legal notice", description: `Lega
  */
 const publisher = {
   name: "Charlotte Steenhuis",
-  status: "[To be completed: e.g. Entrepreneur individuel / micro-entreprise]",
-  address: "[To be completed: business address]",
+  status: "Entrepreneur individuel (EI)",
+  address: "52 rue du Commerce, 58200 Cosne-Cours-sur-Loire, France",
   email: "charlottesteenhuis@hotmail.com",
   phone: "[To be completed]",
-  siret: "[To be completed: SIRET number]",
+  siret: "903 155 455 00020",
+  register: "Registered in the French National Business Register (RNE)",
   vat: "[To be completed: VAT number, or “VAT not applicable, art. 293 B of the French CGI”]",
 };
 
@@ -40,7 +41,7 @@ export default async function LegalNoticePage() {
             Address: {publisher.address}<br />
             Email: <a href={`mailto:${publisher.email}`}>{publisher.email}</a><br />
             Phone: {publisher.phone}<br />
-            SIRET: {publisher.siret}<br />
+            SIRET: {publisher.siret} — {publisher.register}<br />
             VAT: {publisher.vat}
           </p>
           <p>Publication director: {publisher.name}.</p>

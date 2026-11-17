@@ -25,6 +25,7 @@ export function useIntroAnimation(screen: RefObject<HTMLDivElement | null>, sign
         onScrollReady?.(false);
         scope?.current?.removeAttribute("data-intro-pending");
         gsap.set(".hero-line, .hero-copy .collection-button", { y: 0, yPercent: 120 });
+        gsap.set(".hero-copy h1 .hero-line", { yPercent: 180 });
         gsap.set(".hero-artwork", { clipPath: "inset(0% 0% 100% 100%)" });
         gsap.set(".site-header--home", { y: 0, yPercent: -100, opacity: 0 });
       }

@@ -160,6 +160,8 @@ a:focus-visible {
 @media (prefers-reduced-motion: no-preference) {
   [data-intro-pending] .hero-line,
   [data-intro-pending] .hero-copy .collection-button { transform: translateY(120%); }
+  /* Title lines are tighter than their mask: start lower so no letter peeks out. */
+  [data-intro-pending] .hero-copy h1 .hero-line { transform: translateY(180%); }
   [data-intro-pending] .hero-artwork { clip-path: inset(0% 0% 100% 100%); }
   [data-intro-pending] .site-header--home { transform: translateY(-100%); opacity: 0; }
 }

@@ -2,8 +2,9 @@
 
 ## Avant la mise en ligne
 
-- [ ] **Mentions légales** : compléter les valeurs `[To be completed]` dans `app/legal-notice/page.tsx`
-      (statut juridique, adresse, téléphone, SIRET, TVA, médiateur de la consommation).
+- [ ] **Mentions légales** : statut, adresse et SIRET remplis (source : avis SIRENE). Reste à demander à la cliente
+      dans `app/legal-notice/page.tsx` : téléphone, régime de TVA (n° de TVA ou « TVA non applicable, art. 293 B du CGI »)
+      et médiateur de la consommation (obligatoire pour la vente aux particuliers).
 - [ ] **Politique de livraison** : la rédiger dans l’admin Shopify (Paramètres → Politiques → Politique d’expédition).
       Le lien « Shipping » apparaît automatiquement dans le footer dès qu’elle est remplie (cache d’environ 1 h).
 
@@ -19,9 +20,8 @@
 
 ## À voir avec la cliente
 
-- [ ] **Marques déposées** : des produits portent des noms de personnages protégés (« Bugs Bunny » — Warner Bros,
-      « Ariel » — Disney, à vérifier aussi pour « Black Panther »). Risque de demande de retrait ou de litige :
-      envisager de les renommer.
+- [x] **Marques déposées** (Bugs Bunny, Ariel, Black Panther) : signalé. La cliente vendait déjà ces pièces avant la
+      refonte ; décision qui lui revient.
 - [ ] « Bon à petit » : jeu de mots volontaire ou faute de frappe pour « Bon appétit » ?
 
 ## Catalogue Shopify (plus tard)
