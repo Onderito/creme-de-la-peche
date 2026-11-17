@@ -3,7 +3,7 @@ import { ProductShowcase } from "./components/product-showcase";
 import { MeetCharlotte } from "./components/meet-charlotte";
 import { SiteHeader } from "./components/site-header";
 import { Faq } from "./components/faq";
-import introStyles from "./components/intro-loader.module.css";
+import { HomeMotion } from "./components/home-motion";
 
 const studioDetails = [
   { value: "Original", label: "Drawn by hand" },
@@ -14,10 +14,7 @@ const studioDetails = [
 
 export default function Home() {
   return (
-    <main id="top">
-      <div className={introStyles.screen} aria-hidden="true">
-        <span className={introStyles.signature}>crème de la pêche</span>
-      </div>
+    <HomeMotion>
       <a className="skip-link" href="#studio">Skip to the studio</a>
       <SiteHeader home />
 
@@ -26,20 +23,19 @@ export default function Home() {
 
           <div className="hero-copy">
             <h1 id="hero-title">
-              <span>Art to wear.</span>
-              <span>Art to keep.</span>
+              <span className="hero-line-mask"><span className="hero-line">Art to wear.</span></span>
+              <span className="hero-line-mask"><span className="hero-line">Art to keep.</span></span>
             </h1>
             <p className="hero-description">
-              My drawings, from paper to prints and pieces you can wear.
-              <br />
-              Feminine, sensual, a little bold.
+              <span className="hero-line-mask"><span className="hero-line">My drawings, from paper to prints and pieces you can wear.</span></span>
+              <span className="hero-line-mask"><span className="hero-line">Feminine, sensual, a little bold.</span></span>
             </p>
-            <a className="collection-button" href="#collections">
+            <div className="hero-button-mask"><a className="collection-button" href="#collections">
               Explore my collections
               <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
                 <path d="M4 16 16 4M5 4h11v11" />
               </svg>
-            </a>
+            </a></div>
           </div>
         </div>
 
@@ -96,6 +92,6 @@ export default function Home() {
       </section>
       <MeetCharlotte />
       <Faq />
-    </main>
+    </HomeMotion>
   );
 }

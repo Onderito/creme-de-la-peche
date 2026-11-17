@@ -9,7 +9,6 @@
   background: #e9e2d6;
   clip-path: inset(0);
   pointer-events: none;
-  animation: leave 750ms cubic-bezier(.76, 0, .24, 1) 3.35s both;
 }
 
 .screen::before {
@@ -21,6 +20,12 @@
   pointer-events: none;
 }
 
+.composition { position: relative; display: grid; justify-items: center; gap: clamp(24px, 4vh, 42px); }
+.preview { position: relative; width: clamp(120px, 15vw, 180px); aspect-ratio: 3 / 4; overflow: hidden; opacity: 0; clip-path: inset(100% 0% 0% 0%); }
+.slide { position: absolute; inset: 0; }
+.slide:not(:first-child) { opacity: 0; }
+.slide img { object-fit: cover; }
+
 .signature {
   display: block;
   margin: 0;
@@ -31,29 +36,13 @@
   line-height: 1.45;
   white-space: nowrap;
   clip-path: inset(0 100% 0 0);
-  animation:
-    write 2.15s cubic-bezier(.4, 0, .2, 1) 150ms both,
-    erase 500ms cubic-bezier(.76, 0, .24, 1) 2.8s forwards;
 }
 
-.loading { animation: none; pointer-events: auto; }
-.loading .signature { animation: write 1.5s cubic-bezier(.4, 0, .2, 1) both; }
-
-@keyframes write {
-  to { clip-path: inset(0); }
-}
-
-@keyframes erase {
-  from { clip-path: inset(0); }
-  to { clip-path: inset(0 0 0 100%); }
-}
-
-@keyframes leave {
-  to { clip-path: inset(0 0 0 100%); visibility: hidden; }
-}
+.loading { pointer-events: auto; }
 
 @media (prefers-reduced-motion: reduce) {
   .screen { display: none; }
   .loading { display: grid; }
   .loading .signature { clip-path: none; animation: none; }
+  .loading .preview { opacity: 1; clip-path: none; }
 }

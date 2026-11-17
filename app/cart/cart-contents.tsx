@@ -6,6 +6,7 @@ import { useActionState } from "react";
 import { changeCart } from "@/app/actions/cart-actions";
 import { formatMoney } from "@/lib/shopify/format-money";
 import { productPath } from "@/lib/shopify/product-path";
+import { visibleVariantOptions, variantOptionsLabel } from "@/lib/shopify/variant-labels";
 import type { PublicCart } from "@/lib/shopify/types/cart-types";
 import styles from "./cart.module.css";
 
@@ -30,7 +31,7 @@ export function CartContents({ cart, notice }: { cart: PublicCart | null; notice
               const variant = line.merchandise;
               const product = variant.product;
               const rule = variant.quantityRule;
-              const selectedOptions = variant.selectedOptions.filter((option) => product.options.some((item) => item.name === option.name && item.values.length > 1));
+              const selectedOptions = visibleVariantOptions(variant.selectedOptions, product.options);
               const image = variant.image;
               const imageUrl = image ? new URL(image.url) : null;
               imageUrl?.searchParams.set("format", "webp");
@@ -42,7 +43,7 @@ export function CartContents({ cart, notice }: { cart: PublicCart | null; notice
                   </Link>
                   <div className={styles.lineDetails}>
                     <Link className={styles.productTitle} href={url}>{product.title}</Link>
-                    {selectedOptions.length ? <p className={styles.variant}>{selectedOptions.map((option) => option.value).join(" / ")}</p> : null}
+                    {selectedOptions.length ? <p className={styles.variant}>{variantOptionsLabel(selectedOptions)}</p> : null}
                     <p className={styles.unitPrice}>{formatMoney(line.cost.amountPerQuantity)} each</p>
                     <div className={styles.lineControls}>
                       {line.isOriginal ? <p className={styles.uniqueNote}>One of one · Quantity {line.quantity}</p> : <form action={action} className={styles.quantity} aria-label={`Quantity for ${product.title}`}>

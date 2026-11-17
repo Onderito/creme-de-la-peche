@@ -5,6 +5,7 @@ import { useActionState, useId, useState, type ReactNode } from "react";
 import { useCartConfirmation } from "@/app/components/cart-confirmation";
 import { changeCart } from "@/app/actions/cart-actions";
 import { formatMoney } from "@/lib/shopify/format-money";
+import { artworkFormat } from "@/lib/shopify/variant-labels";
 import type { ProductVariant } from "@/lib/shopify/types/product-types";
 import type { ShopifyImage } from "@/lib/shopify/types/storefront-types";
 import styles from "./product.module.css";
@@ -36,6 +37,10 @@ export function ProductDetail({ product, children }: { product: ProductData; chi
     return result;
   }, { message: "" });
   const options = product.options.filter((option) => option.values.length > 1);
+  const formats = product.options.flatMap((option) => {
+    const format = artworkFormat(option);
+    return format ? [format] : [];
+  });
   const quantityId = useId();
   const amount = product.isOriginal ? 1 : Number(quantity);
   const rule = selected?.quantityRule;
@@ -70,6 +75,8 @@ export function ProductDetail({ product, children }: { product: ProductData; chi
           <span>{formatMoney(selected.price)}</span>
           {selected.compareAtPrice && Number(selected.compareAtPrice.amount) > Number(selected.price.amount) ? <del>{formatMoney(selected.compareAtPrice)}</del> : null}
         </div> : null}
+
+        {formats.length ? <dl className={styles.format}>{formats.map((format) => <div key={format}><dt>Format</dt><dd>{format}</dd></div>)}</dl> : null}
 
         <form action={action} className={styles.purchase} aria-label={`Add ${product.title} to cart`}>
           <input type="hidden" name="operation" value="add" />

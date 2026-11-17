@@ -1,4 +1,6 @@
 "use server";
+
+import { visibleVariantOptions, variantOptionsLabel } from "@/lib/shopify/variant-labels";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { getProduct } from "@/lib/shopify/catalog/product-service";
@@ -85,7 +87,7 @@ export async function changeCart(_previous: CartActionState, form: FormData): Pr
       const variant = line.merchandise;
       confirmation = {
         title: variant.product.title,
-        options: variant.selectedOptions.filter((option) => variant.product.options.some((item) => item.name === option.name && item.values.length > 1)).map((option) => option.value).join(" / "),
+        options: variantOptionsLabel(visibleVariantOptions(variant.selectedOptions, variant.product.options)),
         quantity: line.quantity,
         price: line.cost.totalAmount,
         image: variant.image ? { url: variant.image.url, altText: variant.image.altText } : null,
