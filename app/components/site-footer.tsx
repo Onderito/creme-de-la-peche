@@ -1,4 +1,5 @@
 import styles from "./site-footer.module.css";
+import { policyLinks } from "@/lib/shopify/policies";
 
 const shopUrl = "https://cremedelapeche.shop";
 const contactUrl = "mailto:charlottesteenhuis@hotmail.com";
@@ -58,9 +59,7 @@ export function SiteFooter() {
       <div className={styles.bottom}>
         <p>© 2026 Crème de la pêche</p>
         <nav className={styles.policies} aria-label="Shop policies">
-          <a href={`${shopUrl}/policies/refund-policy`}>Returns &amp; exchanges</a>
-          <a href={`${shopUrl}/policies/privacy-policy`}>Privacy</a>
-          <a href={`${shopUrl}/policies/terms-of-service`}>Terms</a>
+          {policyLinks.map(({ href, label }) => <a href={href} key={href}>{label}</a>)}
         </nav>
       </div>
     </footer>

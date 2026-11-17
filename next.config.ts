@@ -4,6 +4,13 @@ const nextConfig: NextConfig = {
   /* config options here */
   cacheComponents: true,
   partialPrefetching: true,
+  async redirects() {
+    return [
+      { source: "/collections/artworks", destination: "/collections/creme-de-la-peche", permanent: true },
+      { source: "/collections/artworks/art", destination: "/collections/creme-de-la-peche", permanent: true },
+      { source: "/collections/:collection/products/:handle", destination: "/products/:handle", permanent: true },
+    ];
+  },
   images: {
     remotePatterns: [
       { protocol: "https", hostname: "cdn.shopify.com", pathname: "/s/files/**" },

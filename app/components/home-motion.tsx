@@ -1,15 +1,19 @@
 "use client";
 
-import { useRef, type ReactNode } from "react";
+import { useRef, useState, type ReactNode } from "react";
 import { IntroVisual } from "./intro-animation";
 import { useIntroAnimation } from "../animations/use-intro-animation";
+import { useScrollReveals } from "../animations/use-scroll-reveals";
+import { ScrollRevealsReadyContext } from "../animations/scroll-reveals-context";
 
 export function HomeMotion({ children }: { children: ReactNode }) {
   const scope = useRef<HTMLElement>(null);
   const screen = useRef<HTMLDivElement>(null);
   const signature = useRef<HTMLSpanElement>(null);
-  useIntroAnimation(screen, signature, false, scope);
-  return <main id="top" ref={scope} data-intro-pending="">
+  const [scrollReady, setScrollReady] = useState(false);
+  useIntroAnimation(screen, signature, false, scope, false, setScrollReady);
+  useScrollReveals(scope, scrollReady);
+  return <ScrollRevealsReadyContext.Provider value={scrollReady}><main id="top" ref={scope} data-intro-pending="" data-scroll-reveal-scope="">
     <noscript><style>{`
       [data-intro-pending] .hero-line,
       [data-intro-pending] .hero-copy .collection-button,
@@ -17,5 +21,5 @@ export function HomeMotion({ children }: { children: ReactNode }) {
       [data-intro-pending] .hero-artwork { clip-path: none; }
     `}</style></noscript>
     <IntroVisual screen={screen} signature={signature} />{children}
-  </main>;
+  </main></ScrollRevealsReadyContext.Provider>;
 }

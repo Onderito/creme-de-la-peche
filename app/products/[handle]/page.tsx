@@ -13,18 +13,21 @@ import { formatMoney } from "@/lib/shopify/format-money";
 import { productPath } from "@/lib/shopify/product-path";
 import { ProductDetail } from "./product-detail";
 import styles from "./product.module.css";
+import { absoluteUrl, excerpt, pageMetadata, siteName, socialImage } from "@/lib/seo";
+import { JsonLd } from "@/app/components/json-ld";
 
 type Props = { params: Promise<{ handle: string }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { handle } = await params;
   const product = await getProduct({ handle });
-  if (!product) return { title: "Piece not found — Crème de la pêche" };
-  return {
-    title: `${product.seo.title || product.title} — Crème de la pêche`,
-    description: product.seo.description || product.description.slice(0, 160),
-    openGraph: { title: product.title, images: product.featuredImage ? [product.featuredImage.url] : [] },
-  };
+  if (!product) return { title: "Piece not found — Crème de la pêche", robots: { index: false, follow: true } };
+  return pageMetadata({
+    title: product.seo.title || product.title,
+    description: excerpt(product.seo.description || product.description),
+    path: productPath(handle),
+    images: product.featuredImage ? [socialImage(product.featuredImage)] : undefined,
+  });
 }
 
 async function Suggestions({ productId }: { productId: string }) {
@@ -54,6 +57,24 @@ async function Content({ params }: Props) {
   const content = productContent(product.descriptionHtml);
   const images = product.images.length ? product.images : product.featuredImage ? [product.featuredImage] : [];
   return <>
+    <JsonLd data={{
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "@id": `${absoluteUrl(productPath(handle))}#product`,
+      url: absoluteUrl(productPath(handle)),
+      name: product.title,
+      description: product.description,
+      image: images.map((image) => socialImage(image).url),
+      brand: { "@type": "Brand", name: siteName },
+      offers: product.variants.map((variant) => ({
+        "@type": "Offer",
+        url: absoluteUrl(productPath(handle)),
+        price: variant.price.amount,
+        priceCurrency: variant.price.currencyCode,
+        availability: `https://schema.org/${!variant.availableForSale ? "OutOfStock" : variant.currentlyNotInStock ? "BackOrder" : "InStock"}`,
+        seller: { "@type": "Organization", name: siteName },
+      })),
+    }} />
     <nav className={styles.breadcrumb} aria-label="Breadcrumb"><Link href="/#collections">Collections</Link><span aria-hidden="true">/</span><span aria-current="page">{product.title}</span></nav>
     <ProductDetail key={product.id} product={{ handle: product.handle, title: product.title, productType: product.productType, options: product.options, variants: product.variants, images, isOriginal: originals.includes(handle) }}>
       <div className={styles.details}>
@@ -62,7 +83,7 @@ async function Content({ params }: Props) {
           {content.description ? <div className={styles.description} dangerouslySetInnerHTML={{ __html: content.description }} /> : <p className={styles.description}>{product.description || "Have a question about this piece? Get in touch below."}</p>}
         </details>
         {content.measurements ? <details><summary>Size guide<span aria-hidden="true">+</span></summary><div className={`${styles.description} ${styles.measurements}`} tabIndex={0} role="region" aria-label="Size measurements" dangerouslySetInnerHTML={{ __html: content.measurements }} /></details> : null}
-        <details><summary>Shipping &amp; returns<span aria-hidden="true">+</span></summary><div className={styles.description}><p>Delivery options and costs are shown at checkout, based on your address.</p><p>For return conditions, see my <a href="https://cremedelapeche.shop/policies/refund-policy">returns &amp; exchanges policy</a>.</p></div></details>
+        <details><summary>Shipping &amp; returns<span aria-hidden="true">+</span></summary><div className={styles.description}><p>Delivery options and costs are shown at checkout, based on your address.</p><p>For return conditions, see my <Link href="/policies/refund-policy">returns &amp; exchanges policy</Link>.</p></div></details>
       </div>
       <a className={styles.question} href="mailto:charlottesteenhuis@hotmail.com">A question about this piece? Get in touch</a>
     </ProductDetail>

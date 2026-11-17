@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { AddToCart } from "./add-to-cart";
+import { ScrollRevealGroup } from "./scroll-reveal-group";
 import { productPath } from "@/lib/shopify/product-path";
 import { getCollectionProducts } from "@/lib/shopify/catalog/collection-service";
 import { getProduct } from "@/lib/shopify/catalog/product-service";
@@ -41,7 +42,7 @@ function ProductCard({ product, original = false }: { product: ProductSummary; o
   return (
     <article className={`product-card${original ? " product-card--original" : ""}`}>
       <Link className="product-link" href={productPath(product.handle)}>
-        <div className="product-image">
+        <div className="product-image" data-scroll-reveal="image">
           <Image
             src={imageUrl.toString()}
             alt={image.altText || product.title}
@@ -50,7 +51,7 @@ function ProductCard({ product, original = false }: { product: ProductSummary; o
           />
           {!product.availableForSale && <span className="product-sold-out">Sold out</span>}
         </div>
-        <div className="product-caption">
+        <div className="product-caption" data-scroll-reveal="block">
           <h4>{product.title}</h4>
           <span className="product-price">
             {hasPriceRange ? "from " : ""}{formatPrice(product.priceRange.minVariantPrice)}
@@ -58,13 +59,13 @@ function ProductCard({ product, original = false }: { product: ProductSummary; o
         </div>
       </Link>
       {original && "description" in product && (
-        <p className="product-description">
+        <p className="product-description" data-scroll-reveal="text">
           Original, 1 of 1
           {details && <span className="product-description-details"> · {details}</span>}
         </p>
       )}
       {original && "variants" in product && product.availableForSale && (
-        <AddToCart compact handle={product.handle} title={product.title} variants={(product as Product).variants.map(({ id, title, price, availableForSale }) => ({ id, title, price, availableForSale }))} />
+        <div data-scroll-reveal="block"><AddToCart compact handle={product.handle} title={product.title} variants={(product as Product).variants.map(({ id, title, price, availableForSale }) => ({ id, title, price, availableForSale }))} /></div>
       )}
     </article>
   );
@@ -80,10 +81,10 @@ function CollectionHeading({ id, title, description, handle, cta }: {
   return (
     <header className="collection-heading">
       <div>
-        <h3 id={id}>{title}</h3>
-        <p>{description}</p>
+        <h3 id={id} data-scroll-reveal="text">{title}</h3>
+        <p data-scroll-reveal="text" data-reveal-delay="0.04">{description}</p>
       </div>
-      <Link className="collection-view-all" href={`/collections/${handle}`}>{cta}</Link>
+      <Link className="collection-view-all" data-scroll-reveal="block" href={`/collections/${handle}`}>{cta}</Link>
     </header>
   );
 }
@@ -120,12 +121,12 @@ export async function ProductShowcase() {
     .slice(0, 4);
 
   return (
-    <>
+    <ScrollRevealGroup>
       <section className="collection-group collection-group--artworks" aria-labelledby="artworks-title">
         <header className="collection-heading collection-heading--original">
           <div>
-            <h3 id="artworks-title">Original Artworks</h3>
-            <p>One of one. Drawn by hand, signed by me.</p>
+            <h3 id="artworks-title" data-scroll-reveal="text">Original Artworks</h3>
+            <p data-scroll-reveal="text" data-reveal-delay="0.04">One of one. Drawn by hand, signed by me.</p>
           </div>
         </header>
         <div className="artworks-grid">
@@ -133,7 +134,7 @@ export async function ProductShowcase() {
           <div className="artwork-secondary">
             {secondArtwork && <ProductCard product={secondArtwork} original />}
           </div>
-          <Link className="collection-view-all artworks-view-all" href="/collections/creme-de-la-peche">
+          <Link className="collection-view-all artworks-view-all" data-scroll-reveal="block" href="/collections/creme-de-la-peche">
             View all artworks
           </Link>
         </div>
@@ -164,6 +165,6 @@ export async function ProductShowcase() {
           {clothingProducts.map((product) => <ProductCard key={product.id} product={product} />)}
         </div>
       </section>
-    </>
+    </ScrollRevealGroup>
   );
 }

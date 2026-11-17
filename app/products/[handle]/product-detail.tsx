@@ -1,9 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { useActionState, useId, useState, type ReactNode } from "react";
+import { useActionState, useId, useRef, useState, type ReactNode } from "react";
 import { useCartConfirmation } from "@/app/components/cart-confirmation";
-import { changeCart } from "@/app/actions/cart-actions";
+import { cartSubmitter, changeCartSafely } from "@/app/actions/cart-client-action";
 import { formatMoney } from "@/lib/shopify/format-money";
 import { artworkFormat } from "@/lib/shopify/variant-labels";
 import type { ProductVariant } from "@/lib/shopify/types/product-types";
@@ -30,9 +30,10 @@ export function ProductDetail({ product, children }: { product: ProductData; chi
   const [activeImage, setActiveImage] = useState(initial?.image ?? product.images[0]);
   const [quantity, setQuantity] = useState(String(initial?.quantityRule.minimum ?? 1));
   const showConfirmation = useCartConfirmation();
-  const [state, action, pending] = useActionState(async (previous: Parameters<typeof changeCart>[0], form: FormData) => {
-    const trigger = document.activeElement instanceof HTMLElement ? document.activeElement : null;
-    const result = await changeCart(previous, form);
+  const triggerRef = useRef<HTMLElement | null>(null);
+  const [state, action, pending] = useActionState(async (previous: Parameters<typeof changeCartSafely>[0], form: FormData) => {
+    const trigger = triggerRef.current;
+    const result = await changeCartSafely(previous, form);
     if (result.confirmation) showConfirmation(result.confirmation, trigger);
     return result;
   }, { message: "" });
@@ -78,7 +79,7 @@ export function ProductDetail({ product, children }: { product: ProductData; chi
 
         {formats.length ? <dl className={styles.format}>{formats.map((format) => <div key={format}><dt>Format</dt><dd>{format}</dd></div>)}</dl> : null}
 
-        <form action={action} className={styles.purchase} aria-label={`Add ${product.title} to cart`}>
+        <form action={action} onSubmitCapture={(event) => { triggerRef.current = cartSubmitter(event); }} className={styles.purchase} aria-label={`Add ${product.title} to cart`}>
           <input type="hidden" name="operation" value="add" />
           <input type="hidden" name="handle" value={product.handle} />
           <input type="hidden" name="variantId" value={selected?.id ?? ""} />

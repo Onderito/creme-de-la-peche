@@ -1,8 +1,8 @@
 "use client";
 
-import { useActionState, useId, useState } from "react";
+import { useActionState, useId, useRef, useState } from "react";
 import { useCartConfirmation } from "@/app/components/cart-confirmation";
-import { changeCart } from "@/app/actions/cart-actions";
+import { cartSubmitter, changeCartSafely } from "@/app/actions/cart-client-action";
 import { formatMoney } from "@/lib/shopify/format-money";
 import type { ProductVariant } from "@/lib/shopify/types/product-types";
 import styles from "../cart/cart.module.css";
@@ -13,9 +13,10 @@ export function AddToCart({ handle, title, variants, compact = false }: {
   handle: string; title: string; variants: Option[]; compact?: boolean;
 }) {
   const showConfirmation = useCartConfirmation();
-  const [state, action, pending] = useActionState(async (previous: Parameters<typeof changeCart>[0], form: FormData) => {
-    const trigger = document.activeElement instanceof HTMLElement ? document.activeElement : null;
-    const result = await changeCart(previous, form);
+  const triggerRef = useRef<HTMLElement | null>(null);
+  const [state, action, pending] = useActionState(async (previous: Parameters<typeof changeCartSafely>[0], form: FormData) => {
+    const trigger = triggerRef.current;
+    const result = await changeCartSafely(previous, form);
     if (result.confirmation) showConfirmation(result.confirmation, trigger);
     return result;
   }, { message: "" });
@@ -27,7 +28,7 @@ export function AddToCart({ handle, title, variants, compact = false }: {
   if (!selected) return null;
 
   return (
-    <form action={action} className={compact ? styles.quickAdd : styles.addForm} aria-label={`Add ${title} to cart`}>
+    <form action={action} onSubmitCapture={(event) => { triggerRef.current = cartSubmitter(event); }} className={compact ? styles.quickAdd : styles.addForm} aria-label={`Add ${title} to cart`}>
       <input type="hidden" name="operation" value="add" />
       <input type="hidden" name="handle" value={handle} />
 

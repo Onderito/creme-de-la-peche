@@ -1,15 +1,16 @@
 import "server-only";
 import { cookies } from "next/headers";
-const COOKIE = "cdlp_cart";
+import { CART_COOKIE_MAX_AGE, CART_COOKIE_NAME } from "./cart-cookie-policy";
+import { usableCartId } from "./cart-id";
 export async function readCartId() {
-  return (await cookies()).get(COOKIE)?.value;
+  return usableCartId((await cookies()).get(CART_COOKIE_NAME)?.value);
 }
 export async function saveCartId(id: string) {
-  (await cookies()).set(COOKIE, id, {
+  (await cookies()).set(CART_COOKIE_NAME, id, {
     httpOnly: true, sameSite: "lax", secure: process.env.NODE_ENV === "production",
-    path: "/", maxAge: 60 * 60 * 24 * 10,
+    path: "/", maxAge: CART_COOKIE_MAX_AGE,
   });
 }
 export async function clearCartId() {
-  (await cookies()).delete(COOKIE);
+  (await cookies()).delete(CART_COOKIE_NAME);
 }

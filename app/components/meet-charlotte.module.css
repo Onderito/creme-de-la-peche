@@ -28,7 +28,9 @@
 }
 
 .introTitle { color: inherit; letter-spacing: -0.04em; }
-.introTitle span, .behindTitle span { display: block; }
+.introLineMask { display: block; overflow: clip; padding-block: 0.16em; margin-block: -0.16em; }
+.introLine { display: block; white-space: nowrap; }
+.behindTitle > span { display: block; }
 .introSubtitle { margin: 32px 0 0; font-size: 18px; line-height: 1.4; }
 
 .chapter {

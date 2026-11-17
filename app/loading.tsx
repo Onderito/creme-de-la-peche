@@ -1,5 +1,5 @@
 import { IntroAnimation } from "./components/intro-animation";
 
 export default function Loading() {
-  return <IntroAnimation loading />;
+  return <div className="route-loading"><IntroAnimation loading /></div>;
 }

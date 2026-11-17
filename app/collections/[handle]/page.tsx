@@ -10,14 +10,20 @@ import { collectionPages, collectionLinks, isCollectionHandle } from "@/lib/shop
 import { productPath } from "@/lib/shopify/product-path";
 import { formatMoney } from "@/lib/shopify/format-money";
 import styles from "./collection.module.css";
+import { pageMetadata } from "@/lib/seo";
 
 type Props = { params: Promise<{ handle: string }>; searchParams: Promise<{ page?: string | string[] }> };
 const PAGE_SIZE = 24;
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { handle } = await params;
-  if (!isCollectionHandle(handle)) return { title: "Collection not found — Crème de la pêche" };
-  return { title: `${collectionPages[handle].title} — Crème de la pêche`, description: collectionPages[handle].description };
+export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
+  const [{ handle }, query] = await Promise.all([params, searchParams]);
+  if (!isCollectionHandle(handle)) return { title: "Collection not found — Crème de la pêche", robots: { index: false, follow: true } };
+  const page = typeof query.page === "string" && /^[1-9]\d{0,5}$/.test(query.page) ? Number(query.page) : 1;
+  return pageMetadata({
+    title: `${collectionPages[handle].seoTitle}${page > 1 ? ` — Page ${page}` : ""}`,
+    description: collectionPages[handle].seoDescription,
+    path: `/collections/${handle}${page > 1 ? `?page=${page}` : ""}`,
+  });
 }
 
 async function Content({ params, searchParams }: Props) {

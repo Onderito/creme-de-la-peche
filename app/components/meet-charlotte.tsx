@@ -11,10 +11,10 @@ export function MeetCharlotte() {
     <section id="charlotte" className={styles.section} aria-labelledby="charlotte-title">
       <header className={styles.intro}>
         <h2 id="charlotte-title" className={styles.introTitle}>
-          <span>From my hands</span>
-          <span>to yours.</span>
+          <span className={styles.introLineMask}><span className={styles.introLine} data-scroll-reveal="line">From my hands</span></span>{" "}
+          <span className={styles.introLineMask}><span className={styles.introLine} data-scroll-reveal="line">to yours.</span></span>
         </h2>
-        <p className={styles.introSubtitle}>Artist &amp; tattooist</p>
+        <p className={styles.introSubtitle} data-scroll-reveal="text" data-reveal-delay="0.12">Artist &amp; tattooist</p>
       </header>
 
       <section className={`${styles.chapter} ${styles.behind}`} aria-labelledby="behind-drawings-title">

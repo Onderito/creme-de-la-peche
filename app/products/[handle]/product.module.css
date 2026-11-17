@@ -3,7 +3,7 @@
 .breadcrumb a { display: inline-flex; min-height: 44px; align-items: center; text-decoration: underline; text-underline-offset: 4px; }
 .breadcrumb span:last-child { overflow-wrap: anywhere; }
 .product { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); gap: clamp(40px, 7vw, 120px); align-items: start; }
-.gallery { min-width: 0; position: sticky; top: 24px; }
+.gallery { min-width: 0; position: sticky; top: 104px; }
 .mainImage { position: relative; display: flex; align-items: center; justify-content: center; width: 100%; aspect-ratio: 1; max-height: 78svh; background: transparent; }
 .mainImage img { object-fit: contain; }
 .thumbnails { display: flex; gap: 12px; margin-top: 16px; padding: 4px; overflow-x: auto; scrollbar-width: thin; scrollbar-color: #88847e transparent; }

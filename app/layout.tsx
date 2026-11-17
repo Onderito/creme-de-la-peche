@@ -3,6 +3,7 @@ import { Marcellus, Open_Sans, Oooh_Baby } from "next/font/google";
 import { CartConfirmationProvider } from "./components/cart-confirmation";
 import { SiteFooter } from "./components/site-footer";
 import "./globals.css";
+import { indexable, siteDescription, siteName, siteUrl } from "@/lib/seo";
 
 const openSans = Open_Sans({
   variable: "--font-open-sans",
@@ -25,9 +26,11 @@ const ooohBaby = Oooh_Baby({
 });
 
 export const metadata: Metadata = {
-  title: "Crème de la pêche — Art to wear. Art to keep.",
-  description:
-    "I’m Charlotte. Discover my original drawings, art prints, tees and sweatshirts. Drawn by hand. Feminine, sensual, a little bold.",
+  metadataBase: new URL(siteUrl),
+  title: siteName,
+  description: siteDescription,
+  applicationName: siteName,
+  robots: { index: indexable, follow: true },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

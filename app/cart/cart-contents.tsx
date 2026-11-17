@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useActionState } from "react";
-import { changeCart } from "@/app/actions/cart-actions";
+import { changeCartSafely } from "@/app/actions/cart-client-action";
 import { formatMoney } from "@/lib/shopify/format-money";
 import { productPath } from "@/lib/shopify/product-path";
 import { visibleVariantOptions, variantOptionsLabel } from "@/lib/shopify/variant-labels";
@@ -11,7 +11,7 @@ import type { PublicCart } from "@/lib/shopify/types/cart-types";
 import styles from "./cart.module.css";
 
 export function CartContents({ cart, notice }: { cart: PublicCart | null; notice?: string }) {
-  const [state, action, pending] = useActionState(changeCart, { message: "" });
+  const [state, action, pending] = useActionState(changeCartSafely, { message: "" });
   const lines = cart?.lines ?? [];
 
   return (
