@@ -17,6 +17,12 @@
 - [ ] **Lien « Account »** : une fois le domaine basculé, `cremedelapeche.shop/account` n’existera plus côté Shopify.
       Récupérer l’URL du compte client Shopify (Admin → Paramètres → Comptes clients, ex. `shopify.com/<id>/account`)
       et remplacer `shopUrl/account` dans `app/components/site-header.tsx` et `app/components/site-footer.tsx`.
+- [ ] **Google Search Console** (compte Google de la cliente) :
+      1. Vérifier si une propriété existe déjà (ancienne boutique Shopify).
+      2. Sinon, ajouter une propriété « Domaine » `cremedelapeche.shop` et coller l’enregistrement TXT fourni par
+         Google dans les DNS Shopify (peut être fait dès maintenant, sans impact sur le site ni les mails).
+      3. Après la bascule du domaine : menu Sitemaps → envoyer `sitemap.xml`.
+      4. Demander à la cliente de m’ajouter dans Paramètres → Utilisateurs et autorisations (accès « Total »).
 
 ## À voir avec la cliente
 
