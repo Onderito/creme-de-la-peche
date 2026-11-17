@@ -260,17 +260,19 @@ a:focus-visible {
 
 .studio-details li + li { border-left: 1px solid rgb(255 255 255 / 6%); }
 
-.detail-value {
-  font-size: 18px;
+.detail-value,
+.detail-label {
+  color: var(--foreground);
+  font-size: 14px;
   font-weight: 400;
+}
+
+.detail-value {
   line-height: 1.2;
   font-variant-numeric: tabular-nums;
 }
 
 .detail-label {
-  color: #dedcd9;
-  font-size: 18px;
-  font-weight: 400;
   line-height: 1.35;
 }
 
@@ -585,8 +587,6 @@ a:focus-visible {
   }
 
   .studio-details { grid-template-columns: repeat(2, 1fr); margin-top: 64px; }
-  .studio-details .detail-value,
-  .studio-details .detail-label { font-size: 16px; }
   .studio-details li { min-height: 100px; }
   .studio-details li:nth-child(3) { border-left: 0; }
   .studio-details li:nth-child(n + 3) { border-top: 1px solid rgb(255 255 255 / 6%); }
