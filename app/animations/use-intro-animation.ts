@@ -18,7 +18,7 @@ export function useIntroAnimation(screen: RefObject<HTMLDivElement | null>, sign
         timeline.set(frame, { opacity: 1 }, 0.05)
           .fromTo(frame, { clipPath: "inset(100% 0% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 0.45, ease: "power3.inOut" }, 0.05);
         slides.forEach((slide, index) => {
-          if (index > 0) timeline.set(slide, { opacity: 1 }, 0.05 + index * 0.5);
+          if (index > 0) timeline.set(slide, { opacity: 1 }, 0.05 + index * 0.4);
         });
       }
       if (!loading && !collection) {
@@ -34,11 +34,11 @@ export function useIntroAnimation(screen: RefObject<HTMLDivElement | null>, sign
           .to(screen.current, { clipPath: "inset(0 0 0 100%)", duration: 0.45, ease: "power3.inOut" }, 1)
           .set(screen.current, { visibility: "hidden" });
       } else if (!loading) {
-        timeline.to(frame, { opacity: 0, duration: 0.25, ease: "power2.in" }, 3.05)
-          .to(signature.current, { clipPath: "inset(0 0 0 100%)", duration: 0.35, ease: "power2.inOut" }, 3)
-          .to(screen.current, { clipPath: "inset(0 0 0 100%)", duration: 0.65, ease: "power3.inOut" }, 3.35)
+        timeline.to(frame, { opacity: 0, duration: 0.25, ease: "power2.in" }, 2.45)
+          .to(signature.current, { clipPath: "inset(0 0 0 100%)", duration: 0.35, ease: "power2.inOut" }, 2.4)
+          .to(screen.current, { clipPath: "inset(0 0 0 100%)", duration: 0.65, ease: "power3.inOut" }, 2.75)
           .set(screen.current, { visibility: "hidden" })
-          .addLabel("hero", 3.95)
+          .addLabel("hero", 3.35)
           .call(() => onScrollReady?.(true), [], "hero")
           .to(".hero-artwork", { clipPath: "inset(0% 0% 0% 0%)", duration: 1, ease: "power3.inOut", clearProps: "clipPath" }, "hero")
           .to(".site-header--home", { yPercent: 0, opacity: 1, duration: 0.65, ease: "power3.out", clearProps: "transform,opacity" }, "hero")
