@@ -4,6 +4,8 @@ import { MeetCharlotte } from "./components/meet-charlotte";
 import { SiteHeader } from "./components/site-header";
 import { CartCount } from "./components/cart-count";
 import { Faq } from "./components/faq";
+import { StudioMotion } from "./animations/studio-motion";
+import { CollectionsIntroMotion } from "./animations/collections-motion";
 import { HomeMotion } from "./components/home-motion";
 import { JsonLd } from "./components/json-ld";
 import { absoluteUrl, pageMetadata, siteDescription, siteName, siteUrl } from "@/lib/seo";
@@ -66,9 +68,9 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="studio" aria-label="My studio">
+      <StudioMotion>
         <div className="studio-story" id="studio">
-          <p data-scroll-reveal="text">
+          <p>
             I’ve always drawn women. Their faces, their expressions, the details
             that make them who they are. My drawings find their way onto paper,
             prints, tees and sweatshirts.
@@ -77,24 +79,24 @@ export default function Home() {
         <ul className="studio-details" aria-label="From my studio">
           {studioDetails.map((detail, index) => (
             <li key={index}>
-              {detail.value && <span className="detail-value" data-scroll-reveal="text" data-reveal-delay={index * 0.04}>{detail.value}</span>}
-              <span className="detail-label" data-scroll-reveal="text" data-reveal-delay={index * 0.04}>
+              {detail.value && <span className="detail-value">{detail.value}</span>}
+              <span className="detail-label">
                 {detail.label}
                 {detail.secondLine && <><br />{detail.secondLine}</>}
               </span>
             </li>
           ))}
         </ul>
-      </section>
+      </StudioMotion>
 
       <section className="collections" id="collections" aria-labelledby="collections-title">
-        <header className="collections-intro">
-          <h2 id="collections-title" data-scroll-reveal="text">Pieces of my world.</h2>
-          <p data-scroll-reveal="text" data-reveal-delay="0.06">
+        <CollectionsIntroMotion>
+          <h2 id="collections-title">Pieces of my world.</h2>
+          <p>
             Original drawings, art prints and pieces made to wear.
             Find the one that feels like you.
           </p>
-        </header>
+        </CollectionsIntroMotion>
         <Suspense fallback={<p className="catalog-message" role="status">Loading the collections…</p>}>
           <ProductShowcase />
         </Suspense>

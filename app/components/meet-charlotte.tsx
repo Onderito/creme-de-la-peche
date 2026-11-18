@@ -1,26 +1,29 @@
 import Image from "next/image";
 import Link from "next/link";
+import { CharlotteIntroMotion } from "../animations/charlotte-intro-motion";
+import { BehindDrawingsMotion } from "../animations/behind-drawings-motion";
+import { FirstLinesMotion } from "../animations/first-lines-motion";
+import { PaperFirstMotion } from "../animations/paper-first-motion";
+import { PlaceMotion } from "../animations/place-motion";
 import drawingDetail from "../../public/images/charlotte/charlotte-drawing-detail.webp";
 import portrait from "../../public/images/charlotte/charlotte-studio-portrait.webp";
 import firstLines from "../../public/images/charlotte/charlotte-first-lines.webp";
 import atWork from "../../public/images/charlotte/charlotte-at-work.webp";
 import styles from "./meet-charlotte.module.css";
 
+function ChapterLine({ children }: { children: string }) {
+  return <span className={styles.introLineMask}><span className={styles.chapterLine}>{children}</span></span>;
+}
+
 export function MeetCharlotte() {
   return (
     <section id="charlotte" className={styles.section} aria-labelledby="charlotte-title">
-      <header className={styles.intro}>
-        <h2 id="charlotte-title" className={styles.introTitle}>
-          <span className={styles.introLineMask}><span className={styles.introLine} data-scroll-reveal="line">From my hands</span></span>{" "}
-          <span className={styles.introLineMask}><span className={styles.introLine} data-scroll-reveal="line">to yours.</span></span>
-        </h2>
-        <p className={styles.introSubtitle} data-scroll-reveal="text" data-reveal-delay="0.12">Artist &amp; tattooist</p>
-      </header>
+      <CharlotteIntroMotion />
 
-      <section className={`${styles.chapter} ${styles.behind}`} aria-labelledby="behind-drawings-title">
+      <BehindDrawingsMotion>
         <h3 id="behind-drawings-title" className={`${styles.chapterTitle} ${styles.behindTitle}`}>
-          <span>Behind the</span>
-          <span>Drawings</span>
+          <ChapterLine>Behind the</ChapterLine>{" "}
+          <ChapterLine>Drawings</ChapterLine>
         </h3>
         <div className={styles.wallImage}>
           <Image
@@ -48,9 +51,9 @@ export function MeetCharlotte() {
             became more than something I loved doing. It became my work.
           </p>
         </div>
-      </section>
+      </BehindDrawingsMotion>
 
-      <section className={`${styles.chapter} ${styles.firstLines}`} aria-labelledby="first-lines-title">
+      <FirstLinesMotion>
         <div className={styles.drawingImage}>
           <Image
             src={firstLines}
@@ -59,7 +62,9 @@ export function MeetCharlotte() {
             sizes="(max-width: 700px) 85vw, 50vw"
           />
         </div>
-        <h3 id="first-lines-title" className={`${styles.chapterTitle} ${styles.firstTitle}`}>The First Lines</h3>
+        <h3 id="first-lines-title" className={`${styles.chapterTitle} ${styles.firstTitle}`}>
+          <ChapterLine>The First Lines</ChapterLine>
+        </h3>
         <div className={`${styles.copy} ${styles.firstCopy}`}>
           <h4>It started at home.</h4>
           <p>
@@ -67,10 +72,12 @@ export function MeetCharlotte() {
             art. I started from my apartment, with my own drawings.
           </p>
         </div>
-      </section>
+      </FirstLinesMotion>
 
-      <section id="paper-first" className={styles.paperPause} aria-labelledby="paper-first-title">
-        <h3 id="paper-first-title" className={`${styles.chapterTitle} ${styles.paperTitle}`}>Paper first.</h3>
+      <PaperFirstMotion>
+        <h3 id="paper-first-title" className={`${styles.chapterTitle} ${styles.paperTitle}`}>
+          <ChapterLine>Paper first.</ChapterLine>
+        </h3>
         <p className={styles.paperCopy}>
           <span>Every original begins on paper.</span>
           <span>Find one you’d like to keep.</span>
@@ -81,9 +88,9 @@ export function MeetCharlotte() {
             <path d="M4 16 16 4M5 4h11v11" />
           </svg>
         </Link>
-      </section>
+      </PaperFirstMotion>
 
-      <section className={`${styles.chapter} ${styles.place}`} aria-labelledby="place-title">
+      <PlaceMotion>
         <div className={styles.galleryImage}>
           <Image
             src={atWork}
@@ -92,7 +99,9 @@ export function MeetCharlotte() {
             sizes="(max-width: 700px) 85vw, 66vw"
           />
         </div>
-        <h3 id="place-title" className={`${styles.chapterTitle} ${styles.placeTitle}`}>A Place of My Own</h3>
+        <h3 id="place-title" className={`${styles.chapterTitle} ${styles.placeTitle}`}>
+          <ChapterLine>A Place of My Own</ChapterLine>
+        </h3>
         <div className={`${styles.copy} ${styles.placeCopy}`}>
           <h4>Room to grow.</h4>
           <p>
@@ -100,7 +109,7 @@ export function MeetCharlotte() {
             tattoo and welcome the people who connect with my work.
           </p>
         </div>
-      </section>
+      </PlaceMotion>
     </section>
   );
 }

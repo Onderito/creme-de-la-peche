@@ -5,7 +5,12 @@
 }
 
 .intro {
-  padding-block: clamp(160px, 21.875vw, 378px) clamp(160px, 19.56vw, 338px);
+  display: flex;
+  min-height: 100vh;
+  min-height: 100svh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   margin-bottom: clamp(64px, 6vw, 100px);
   text-align: center;
 }
@@ -30,7 +35,7 @@
 .introTitle { color: inherit; letter-spacing: -0.04em; }
 .introLineMask { display: block; overflow: clip; padding-block: 0.16em; margin-block: -0.16em; }
 .introLine { display: block; white-space: nowrap; }
-.behindTitle > span { display: block; }
+.chapterLine { display: block; }
 .introSubtitle { margin: 32px 0 0; font-size: 18px; line-height: 1.4; }
 
 .chapter {
@@ -41,6 +46,7 @@
 }
 
 .chapterTitle { z-index: 2; letter-spacing: -0.06em; }
+.chapterTitle > .introLineMask { width: max-content; }
 
 .wallImage,
 .portraitImage,
@@ -141,6 +147,7 @@
 .paperPause {
   display: flex;
   min-height: 100vh;
+  min-height: 100svh;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -187,15 +194,6 @@
 
 @media (max-width: 700px) {
   .section { padding-bottom: 60px; }
-  .intro {
-    display: flex;
-    min-height: 100vh;
-    min-height: 100svh;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding-block: 0;
-  }
   .introTitle { font-size: clamp(32px, 9vw, 63px); line-height: 0.95; }
   .chapter { column-gap: 12px; }
   .chapterTitle { font-size: clamp(48px, 13.333vw, 80px); line-height: 0.92; }
@@ -215,6 +213,7 @@
   .paperPause { padding-block: 96px; }
   .paperCopy { margin-top: 24px; font-size: 18px; }
   .placeTitle { grid-column: 1 / -1; grid-row: 1; width: 100%; margin: 0 0 24px; white-space: normal; text-wrap: balance; }
+  .placeTitle > .introLineMask { width: auto; }
   .galleryImage { grid-column: 1 / span 10; grid-row: 2; }
   .placeCopy { grid-column: 3 / -1; grid-row: 3; margin-top: 28px; }
 }

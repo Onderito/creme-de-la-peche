@@ -25,7 +25,7 @@ export function CartConfirmationProvider({ children }: { children: ReactNode }) 
   function close() { dialogRef.current?.close(); }
   return <CartConfirmationContext.Provider value={open}>
     {children}
-    <dialog ref={dialogRef} className={styles.dialog} aria-labelledby="cart-confirmation-title" onClose={() => { setItem(null); triggerRef.current?.focus({ preventScroll: true }); }} onClick={(event) => { if (event.target === event.currentTarget) close(); }}>
+    <dialog ref={dialogRef} data-lenis-prevent className={styles.dialog} aria-labelledby="cart-confirmation-title" onClose={() => { setItem(null); triggerRef.current?.focus({ preventScroll: true }); }} onClick={(event) => { if (event.target === event.currentTarget) close(); }}>
       {item && <div className={styles.panel}>
         <div className={styles.heading}><p id="cart-confirmation-title">{item.alreadyInCart ? "Already in your cart." : "Added to your cart."}</p><button className={styles.close} type="button" onClick={close} aria-label="Close cart confirmation">×</button></div>
         {item.warning && <p className={styles.warning} role="status">{item.warning}</p>}

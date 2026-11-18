@@ -17,9 +17,11 @@
 * { box-sizing: border-box; }
 
 html {
-  scroll-behavior: smooth;
   scroll-padding-top: 80px;
 }
+
+/* Native smooth anchors only as a fallback when Lenis is not running. */
+html:not(.lenis) { scroll-behavior: smooth; }
 
 body {
   margin: 0;
@@ -214,14 +216,24 @@ a:focus-visible {
   height: 100%;
 }
 
-.scroll-reveal-scope { display: contents; }
+.reveal-scope { display: contents; }
+
+.scroll-line,
+.scroll-line-mask { display: block; }
+
+/* Homepage scroll reveals (app/animations/use-reveals.ts): hidden before the first paint,
+   only when JS runs and motion is allowed. CSS transitions are paused until revealed so they
+   don't replay GSAP's movement. */
+@media (prefers-reduced-motion: no-preference) {
+  html.reveals [data-reveal]:not([data-revealed]),
+  html.reveals [data-reveal-batch] > :not([data-revealed]) { visibility: hidden; }
+}
+[data-reveal]:not([data-revealed]),
+[data-reveal-batch] > :not([data-revealed]) { transition: none !important; }
 
 /* Reserve page space while the fixed loading overlay is displayed. */
 .route-loading { min-height: 100vh; min-height: 100svh; }
 
-/* Extend each line mask optically so accents and descenders stay intact. */
-.scroll-reveal-line-mask { display: block; padding-block: 0.16em; margin-block: -0.16em; }
-.scroll-reveal-line { display: block; }
 
 .studio { padding: clamp(88px, 9.5vw, 160px) 0 16px; }
 
@@ -366,6 +378,7 @@ a:focus-visible {
 }
 
 .collection-view-all:hover { background: #dedbd5; }
+.collection-view-all:focus-visible { clip-path: none !important; }
 .collection-view-all:active { transform: scale(0.96); }
 
 .artworks-grid {
@@ -606,7 +619,7 @@ a:focus-visible {
 
 @media (prefers-reduced-motion: reduce) {
   .site-header--home { transition: none; }
-  html { scroll-behavior: auto; }
+  html, html:not(.lenis) { scroll-behavior: auto; }
   *, *::before, *::after { transition: none !important; }
 }
 

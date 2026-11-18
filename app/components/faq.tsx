@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
+import { useFaqMotion } from "../animations/faq-motion";
 import styles from "./faq.module.css";
 
 const questions = [
@@ -40,6 +41,7 @@ const questions = [
 ];
 
 export function Faq() {
+  const scope = useFaqMotion();
   const [openId, setOpenId] = useState<string | null>(null);
   const triggers = useRef<Record<string, HTMLButtonElement | null>>({});
 
@@ -49,11 +51,11 @@ export function Faq() {
   }
 
   return (
-    <section id="faq" className={styles.section} aria-labelledby="faq-title">
+    <section ref={scope} id="faq" className={styles.section} aria-labelledby="faq-title">
       <header className={styles.intro}>
         <h2 id="faq-title" className={styles.title}>
-          <span>A few things</span>
-          <span>to know.</span>
+          <span className={styles.lineMask}><span>A few things</span></span>{" "}
+          <span className={styles.lineMask}><span>to know.</span></span>
         </h2>
       </header>
 
@@ -84,12 +86,16 @@ export function Faq() {
                 id={`faq-answer-${id}`}
                 role="region"
                 aria-labelledby={`faq-question-${id}`}
-                hidden={!open}
+                className={styles.answerRegion}
+                aria-hidden={!open}
+                inert={!open}
               >
-                <button className={styles.answer} type="button" onClick={() => closeAnswer(id)}>
-                  <span className={styles.answerText}>{answer}</span>
-                  <span className={styles.srOnly}> Close this answer.</span>
-                </button>
+                <div className={styles.answerClip}>
+                  <button className={styles.answer} type="button" onClick={() => closeAnswer(id)}>
+                    <span className={styles.answerText}>{answer}</span>
+                    <span className={styles.srOnly}> Close this answer.</span>
+                  </button>
+                </div>
               </div>
             </article>
           );

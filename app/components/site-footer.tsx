@@ -1,3 +1,4 @@
+import { FooterMotion } from "../animations/footer-motion";
 import styles from "./site-footer.module.css";
 import { getLegalLinks } from "@/lib/shopify/policy-service";
 
@@ -26,7 +27,7 @@ const groups = [
 export async function SiteFooter() {
   const legalLinks = await getLegalLinks();
   return (
-    <footer id="footer" className={styles.footer}>
+    <FooterMotion>
       <div className={styles.top}>
         <div className={styles.intro}>
           <p className={styles.tagline}>
@@ -54,7 +55,8 @@ export async function SiteFooter() {
       </div>
 
       <a className={styles.brand} href="#top" aria-label="Crème de la pêche — back to top">
-        <span>Crème de</span>{" "}<span>la pêche</span>
+        <span className={styles.brandMask}><span>Crème de</span></span>{" "}
+        <span className={styles.brandMask}><span>la pêche</span></span>
       </a>
 
       <div className={styles.bottom}>
@@ -63,6 +65,6 @@ export async function SiteFooter() {
           {legalLinks.map(({ href, label }) => <a href={href} key={href}>{label}</a>)}
         </nav>
       </div>
-    </footer>
+    </FooterMotion>
   );
 }

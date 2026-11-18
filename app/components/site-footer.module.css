@@ -57,6 +57,11 @@
   white-space: nowrap;
 }
 
+.brandMask { display: inline-block; overflow: clip; vertical-align: top; }
+.brandMask > span { display: block; }
+.brand:focus-visible .brandMask > span { transform: none !important; }
+.navigation li:focus-within { opacity: 1 !important; }
+
 .bottom {
   display: flex;
   align-items: center;
@@ -78,7 +83,7 @@
   .intro { grid-column: 1 / -1; }
   .navigation a { font-size: 14px; }
   .brand { width: 100%; margin: 64px 0 32px; font-size: clamp(48px, 18vw, 110px); line-height: 0.95; white-space: normal; }
-  .brand span { display: block; }
+  .brandMask { display: block; padding-block: 0.1em; margin-block: -0.1em; }
   .bottom { align-items: flex-start; flex-direction: column; gap: 16px; padding-top: 12px; }
   .policies { order: -1; gap: 0 20px; }
 }

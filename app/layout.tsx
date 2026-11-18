@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Marcellus, Open_Sans, Oooh_Baby } from "next/font/google";
 import { CartConfirmationProvider } from "./components/cart-confirmation";
 import { SiteFooter } from "./components/site-footer";
+import { SmoothScroll } from "./components/smooth-scroll";
+import "lenis/dist/lenis.css";
 import "./globals.css";
 import { indexable, siteDescription, siteName, siteUrl } from "@/lib/seo";
 
@@ -37,9 +39,15 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${openSans.variable} ${marcellus.variable} ${ooohBaby.variable} h-full antialiased`}
     >
+      <head>
+        {/* Hide scroll-reveal targets before first paint; without JS they simply stay visible. */}
+        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('reveals')" }} />
+      </head>
       <body className="min-h-full flex flex-col">
+        <SmoothScroll />
         <CartConfirmationProvider>
           {children}
           <SiteFooter />

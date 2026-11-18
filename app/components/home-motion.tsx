@@ -3,7 +3,7 @@
 import { useRef, useState, type ReactNode } from "react";
 import { IntroVisual } from "./intro-animation";
 import { useIntroAnimation } from "../animations/use-intro-animation";
-import { useScrollReveals } from "../animations/use-scroll-reveals";
+import { useReveals } from "../animations/use-reveals";
 import { ScrollRevealsReadyContext } from "../animations/scroll-reveals-context";
 
 export function HomeMotion({ children }: { children: ReactNode }) {
@@ -12,8 +12,8 @@ export function HomeMotion({ children }: { children: ReactNode }) {
   const signature = useRef<HTMLSpanElement>(null);
   const [scrollReady, setScrollReady] = useState(false);
   useIntroAnimation(screen, signature, false, scope, false, setScrollReady);
-  useScrollReveals(scope, scrollReady);
-  return <ScrollRevealsReadyContext.Provider value={scrollReady}><main id="top" ref={scope} data-intro-pending="" data-scroll-reveal-scope="">
+  useReveals(scope, scrollReady);
+  return <ScrollRevealsReadyContext.Provider value={scrollReady}><main id="top" ref={scope} data-intro-pending="" data-reveal-scope="">
     <noscript><style>{`
       [data-intro-pending] .hero-line,
       [data-intro-pending] .hero-copy .collection-button,

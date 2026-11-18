@@ -67,7 +67,10 @@ export function SiteHeader({ home = false, cartCount }: { home?: boolean; cartCo
 
   return (
     <header ref={headerRef} className={`site-header${home ? " site-header--home" : ""}${pastHero ? " site-header--full" : ""}${menuOpen ? " site-header--menu-open" : ""}`}>
-      <Link className="wordmark" href="/" aria-label="Crème de la pêche — home" onClick={() => setMenuOpen(false)}>
+      <Link className="wordmark" href={home ? "#top" : "/"} aria-label="Crème de la pêche — home" onClick={() => {
+        setMenuOpen(false);
+        setCollectionsOpen(false);
+      }}>
         Crème de la pêche
       </Link>
       <nav className="main-nav" aria-label="Main navigation">
