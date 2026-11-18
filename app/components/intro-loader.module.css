@@ -21,10 +21,6 @@
 }
 
 .composition { position: relative; display: grid; justify-items: center; gap: clamp(24px, 4vh, 42px); }
-.preview { position: relative; width: clamp(120px, 15vw, 180px); aspect-ratio: 3 / 4; overflow: hidden; opacity: 0; clip-path: inset(100% 0% 0% 0%); }
-.slide { position: absolute; inset: 0; }
-.slide:not(:first-child) { opacity: 0; }
-.slide img { object-fit: cover; }
 
 .signature {
   display: block;
@@ -44,5 +40,4 @@
   .screen { display: none; }
   .loading { display: grid; }
   .loading .signature { clip-path: none; animation: none; }
-  .loading .preview { opacity: 1; clip-path: none; }
 }
