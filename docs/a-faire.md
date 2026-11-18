@@ -3,13 +3,7 @@
 ## Avant la mise en ligne
 
 - [x] **Mentions légales** : statut, adresse du siège, SIRET, téléphone et n° de TVA remplis.
-- [ ] **Médiateur de la consommation** (obligatoire pour la vente aux particuliers) : la cliente n'en a pas encore.
-      Une fois inscrite, renseigner `mediator` dans `app/legal-notice/page.tsx` : la section s'affichera toute seule.
-- [ ] **TVA à confirmer** : le n° FR06903155455 vient de Pappers, qui le calcule à partir du SIREN. Faire confirmer à
-      la cliente qu'elle est bien assujettie à la TVA ; si elle est en franchise, remplacer par
-      « VAT not applicable, art. 293 B of the French CGI ».
-- [ ] **Adresse** : le siège déclaré (52 rue du Commerce) diffère de l'adresse de la boutique dans Shopify
-      (31 rue Alphonse Baudin). Si elle a déménagé, elle doit mettre à jour son immatriculation (guichet unique INPI).
+- [x] **Adresse** : siège du 52 rue du Commerce retenu pour les mentions légales.
 - [ ] **Politique de livraison** : la rédiger dans l’admin Shopify (Paramètres → Politiques → Politique d’expédition).
       Le lien « Shipping » apparaît automatiquement dans le footer dès qu’elle est remplie (cache d’environ 1 h).
 
@@ -33,13 +27,27 @@
 
 - [x] **Marques déposées** (Bugs Bunny, Ariel, Black Panther) : signalé. La cliente vendait déjà ces pièces avant la
       refonte ; décision qui lui revient.
-- [ ] « Bon à petit » : jeu de mots volontaire ou faute de frappe pour « Bon appétit » ?
+- [x] « Bon à petit » : nom volontaire, on garde.
 
-## Catalogue Shopify (plus tard)
+## Catalogue Shopify (vérifié le 18/11/2026, 309 produits)
 
-- [ ] Les handles des tirages ne correspondent pas à leurs titres : `/products/n-125` affiche « N°121 »,
-      `n-124` → N°120, `n-123` → N°119, `n-122` → N°118. Corriger le handle dans Shopify
-      en cochant « Créer une redirection URL ».
-- [x] Handle du hoodie renommé en `oversized-hoodie-n-51` (redirection de l’ancienne URL dans `next.config.ts`).
-- [ ] Importer des images produit en plus haute résolution (au moins 1200 px de large) : certaines font environ 580 px
-      et paraissent floues sur écran Retina.
+- [ ] **Handles décalés (optionnel, cosmétique)** : environ 110 tirages ont un numéro d'URL décalé par rapport au titre
+      (ex. `n-125` → « N°121 », de `n-9` → « N°8 » jusqu'à `n-125`). Sans impact pour les clients ; à laisser tel quel,
+      les URL sont déjà connues de Google.
+- [ ] **Handles trompeurs (optionnel)** : URL qui portent le nom d'un autre produit :
+      `marylin-monroe-1` (« Cindrella »), `cindrella-kopie` (« Mona Lisa x Boobs »), `marylin-monroe-3`
+      (« Warrior with tattoos »), `travis-barker-tee-1` (« Grateful tee »), `copy-of-hoodie-x-marylin-monroe`
+      (« Hoodie x Mac Miller »), `copy-of-oversized-rihanna-hoodie` (« Oversized hoodie looneytunes »),
+      `copy-of-oversize-hoodie-n-52` (« Oversized hoodie x Angel »). Si renommés dans Shopify, ajouter la redirection
+      de l'ancienne URL dans `next.config.ts`.
+- [x] Handle du hoodie N°51 renommé en `oversized-hoodie-n-51` (redirection dans `next.config.ts`).
+- [x] **Photos** : résolution correcte (2048 px et plus pour vêtements et tirages, environ 1170 px pour les originaux).
+      Seule `cindrella-3` est faible (793 px).
+
+## Mis de côté
+
+- [ ] **TVA à confirmer** : le n° FR06903155455 vient de Pappers, qui le calcule à partir du SIREN. Faire confirmer à
+      la cliente qu'elle est bien assujettie à la TVA ; si elle est en franchise, remplacer par
+      « VAT not applicable, art. 293 B of the French CGI ».
+- [ ] **Médiateur de la consommation** (obligatoire pour la vente aux particuliers) : la cliente n'en a pas encore.
+      Une fois inscrite, renseigner `mediator` dans `app/legal-notice/page.tsx` : la section s'affichera toute seule.
