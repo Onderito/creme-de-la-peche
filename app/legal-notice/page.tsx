@@ -8,23 +8,22 @@ export const metadata = pageMetadata({ title: "Legal notice", description: `Lega
 
 /**
  * French legal notice (LCEN art. 6 & Code de la consommation).
- * TODO: replace every "[To be completed]" value before going live.
+ * Address is the registered office (avis SIRENE), not the studio address set in Shopify.
  */
 const publisher = {
   name: "Charlotte Steenhuis",
   status: "Entrepreneur individuel (EI)",
   address: "52 rue du Commerce, 58200 Cosne-Cours-sur-Loire, France",
   email: "charlottesteenhuis@hotmail.com",
-  phone: "[To be completed]",
+  phone: "+33 7 66 32 58 39",
+  phoneHref: "tel:+33766325839",
   siret: "903 155 455 00020",
   register: "Registered in the French National Business Register (RNE)",
-  vat: "[To be completed: VAT number, or “VAT not applicable, art. 293 B of the French CGI”]",
+  vat: "FR06903155455",
 };
 
-const mediator = {
-  name: "[To be completed: consumer mediator name]",
-  website: "[To be completed: mediator website]",
-};
+/** TODO (required by law): fill in once the shop has joined an approved consumer mediator. */
+const mediator: { name: string; website: string } | null = null;
 
 export default async function LegalNoticePage() {
   const legalLinks = await getLegalLinks();
@@ -40,9 +39,9 @@ export default async function LegalNoticePage() {
             The website {new URL(siteUrl).host} is published by {publisher.name}, {publisher.status}.<br />
             Address: {publisher.address}<br />
             Email: <a href={`mailto:${publisher.email}`}>{publisher.email}</a><br />
-            Phone: {publisher.phone}<br />
+            Phone: <a href={publisher.phoneHref}>{publisher.phone}</a><br />
             SIRET: {publisher.siret} — {publisher.register}<br />
-            VAT: {publisher.vat}
+            Intra-community VAT number: {publisher.vat}
           </p>
           <p>Publication director: {publisher.name}.</p>
 
@@ -69,12 +68,14 @@ export default async function LegalNoticePage() {
             <Link href="/policies/privacy-policy">privacy policy</Link>.
           </p>
 
-          <h2>Consumer mediation</h2>
-          <p>
-            In accordance with articles L.612-1 et seq. of the French Consumer Code, you may contact the following
-            consumer mediator free of charge to resolve a dispute that could not be settled directly with us:{" "}
-            {mediator.name} — {mediator.website}.
-          </p>
+          {mediator ? <>
+            <h2>Consumer mediation</h2>
+            <p>
+              In accordance with articles L.612-1 et seq. of the French Consumer Code, you may contact the following
+              consumer mediator free of charge to resolve a dispute that could not be settled directly with us:{" "}
+              {mediator.name} — {mediator.website}.
+            </p>
+          </> : null}
         </div>
         <nav className={styles.links} aria-label="Shop policies">
           {legalLinks.map(({ href, label }) => <Link href={href} key={href} aria-current={href === "/legal-notice" ? "page" : undefined}>{label}</Link>)}

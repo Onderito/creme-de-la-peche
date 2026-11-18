@@ -6,12 +6,12 @@ import { useIntroAnimation } from "../animations/use-intro-animation";
 import styles from "./intro-loader.module.css";
 
 const previewImages = [
-  "119B0AC2-E7FE-4D3F-A47F-D1C117022DEA.jpg?v=1771086316",
-  "IMG-0625.jpg?v=1771082938",
-  "IMG_3446.heic?v=1728474165",
-  "86CA98EB-7126-4362-B7DA-7BF5F12D75C8.jpg?v=1765212933",
-  "0EE35927-09FF-4896-AE26-6BB16574E68E.jpg?v=1765211072",
-  "9ABDE2B7-14C2-4A8E-AC21-C1F3D33CE1F0.jpg?v=1765210854",
+  "119B0AC2-E7FE-4D3F-A47F-D1C117022DEA.jpg?v=1771086316", // Black Panther
+  "3D445CDB-8D16-4BD3-BFB0-D36AFAE422C4.jpg?v=1765141918", // Warrior
+  "IMG-0853.heic?v=1752750948", // Geisha
+  "B6186E68-F992-4308-B2A6-1524CF13BC7D.jpg?v=1751723888", // Angel
+  "26DE3E99-C3C8-4064-9B1D-EC3F2CCBD223.jpg?v=1751724023", // Femme fatale
+  "ED96940F-F02C-4E8A-8B44-1BA55DB2317E.jpg?v=1765142187", // Warrior with tattoos
 ];
 
 export function IntroAnimation({ loading = false, collection = false }: { loading?: boolean; collection?: boolean }) {

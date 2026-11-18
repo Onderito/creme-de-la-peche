@@ -2,9 +2,14 @@
 
 ## Avant la mise en ligne
 
-- [ ] **Mentions légales** : statut, adresse et SIRET remplis (source : avis SIRENE). Reste à demander à la cliente
-      dans `app/legal-notice/page.tsx` : téléphone, régime de TVA (n° de TVA ou « TVA non applicable, art. 293 B du CGI »)
-      et médiateur de la consommation (obligatoire pour la vente aux particuliers).
+- [x] **Mentions légales** : statut, adresse du siège, SIRET, téléphone et n° de TVA remplis.
+- [ ] **Médiateur de la consommation** (obligatoire pour la vente aux particuliers) : la cliente n'en a pas encore.
+      Une fois inscrite, renseigner `mediator` dans `app/legal-notice/page.tsx` : la section s'affichera toute seule.
+- [ ] **TVA à confirmer** : le n° FR06903155455 vient de Pappers, qui le calcule à partir du SIREN. Faire confirmer à
+      la cliente qu'elle est bien assujettie à la TVA ; si elle est en franchise, remplacer par
+      « VAT not applicable, art. 293 B of the French CGI ».
+- [ ] **Adresse** : le siège déclaré (52 rue du Commerce) diffère de l'adresse de la boutique dans Shopify
+      (31 rue Alphonse Baudin). Si elle a déménagé, elle doit mettre à jour son immatriculation (guichet unique INPI).
 - [ ] **Politique de livraison** : la rédiger dans l’admin Shopify (Paramètres → Politiques → Politique d’expédition).
       Le lien « Shipping » apparaît automatiquement dans le footer dès qu’elle est remplie (cache d’environ 1 h).
 
